@@ -1,15 +1,8 @@
 import { TeachingArea, Grade } from '../../../domain/src/enum';
 import {Email} from '../../../domain/src/interfaces'
 import { Student } from '../../../domain/src/student/Student';
-import FileUpload from './utils';
-export class ConfirmedPassword {
-  arePasswordsMatching(password: string, confirmPassword: string): boolean {
-    return password === confirmPassword;
-  };
-  constructor(readonly passwordOne: string, readonly passwordTwo: string,  arePasswordsMatching: boolean = false){
-    arePasswordsMatching = this.arePasswordsMatching(passwordOne, passwordOne)
-  }
-}
+import FileUpload, { ConfirmedPassword } from './utils';
+
 
 export interface TeacherRegistry {
   name: string;
@@ -23,8 +16,8 @@ export interface TeacherRegistry {
 export interface StudentRegistry {
   name: string;
   email: Email;
-  password: ConfirmedPassword;
-  confirmPassword: string;
+  password: string;
+  confirmPassword: ConfirmedPassword;
   grade: Grade;
 
   
@@ -41,3 +34,5 @@ export interface Answer {
   question: Question;
   text: string
 }
+
+export { ConfirmedPassword };

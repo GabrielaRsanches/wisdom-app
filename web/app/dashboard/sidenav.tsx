@@ -11,12 +11,6 @@ export default function SideNav() {
       </Link>
       <div>
         <NavLinks />
-        <form>
-          <button>
-            <PowerIcon className="w-6" />
-            <div>Sign Out</div>
-          </button>
-        </form>
       </div>
     </div>
   );

@@ -11,3 +11,12 @@ export function onFileSelected(event: any) {
     console.log('Selecione o arquivo:', selectedFile);
   }
 }
+
+export class ConfirmedPassword {
+  arePasswordsMatching(password: string, confirmPassword: string): boolean {
+    return password === confirmPassword;
+  };
+  constructor(readonly passwordOne: string, readonly passwordTwo: string,  arePasswordsMatching: boolean = false){
+    arePasswordsMatching = this.arePasswordsMatching(passwordOne, passwordOne)
+  }
+}

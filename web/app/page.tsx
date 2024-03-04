@@ -1,7 +1,12 @@
 'use client'
 
+import DashboardPage from "./dashboard/page";
+import StudentLogin from "./ui/login/student-login";
+
 export default function Page() {
   return (
-    <h1> this is the home page </h1>
+    <><DashboardPage/>
+   
+    </>
   );
 }
