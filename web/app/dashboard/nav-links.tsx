@@ -18,7 +18,7 @@ export default function NavLinks() {
     <>
       <Card>
         <CardHeader>
-          <Heading size='md'>Wisdom</Heading>
+          <Heading size='md'>WISDOM</Heading>
         </CardHeader>
         <CardBody>
           <Stack divider={<StackDivider />} spacing="1em">
