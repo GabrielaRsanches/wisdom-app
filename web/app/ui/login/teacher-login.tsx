@@ -1,40 +1,43 @@
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
-  Avatar,
-  AvatarGroup,
   Box,
   Button,
   Container,
-  Flex,
   Heading,
   SimpleGrid,
   Stack,
-  useBreakpointValue,
   Text,
-  flexbox,
-  Select,
   Checkbox,
   CheckboxGroup
 } from '@chakra-ui/react'
 import onFileSelected from '@/app/shared/utils';
-import fileUpload from '@/app/shared/utils';
-import { color } from 'framer-motion';
 import { PasswordField } from '@/app/shared/PasswordField';
-import { SetStateAction, useState } from 'react';
+import React,{ useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { TeacherRegistry } from '@/app/shared/definitions';
 
 export default function TeacherLogin() {
-  // const [input, setInput] = useState('')
+  const [selectedTeachingArea, setSelectedTeachingArea] = useState<string>('');
 
-  // const handleInputChange = (e: any) => setInput(e.target.value)
+  const handleChange = (value: string) => {
+    setSelectedTeachingArea(value);
+  };
 
-  // const isError = input === ''
+  const {
+    handleSubmit,
+    register,
+    formState: { isSubmitting, errors },
+  } = useForm<TeacherRegistry>();
+
+  const onSubmit = (data: TeacherRegistry) => {
+    console.log(data); // Handle form submission logic here
+  };
 
   return (
-    <Box position={'relative'}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box position={'relative'}>
       <Container 
         as={SimpleGrid}
         maxW={'2xl'}
@@ -46,53 +49,35 @@ export default function TeacherLogin() {
               account
             </Text>{' '}
           </Heading>
-          <Box as={'form'} mt={10}>
+          <Box as="form" mt={10}>
             <Stack spacing={4}>
               <FormControl isRequired>
-              <Input type='email' placeholder="First and last name"
-                bg={'gray.100'}
-                border={0}
-                color={'gray.500'}
-                _placeholder={{
-                  color: 'gray.500',
-                }} />
-                {/* {!isError ? (
-                  <FormHelperText>
-                  </FormHelperText>
-                ) : (
-                  <FormErrorMessage>Email is required.</FormErrorMessage>
-                )} */}
+              <Input
+                  type="text"
+                  placeholder="First and last name"
+                  {...register('name', {
+                    required: 'This is required',
+                    minLength: { value: 4, message: 'Minimum length should be 4' },
+                  })}
+                />
               </FormControl>
               <FormControl id="email" isRequired>
               <Input
-                type='email'
-                placeholder="Your best email"
-                bg={'gray.100'}
-                border={0}
-                color={'gray.500'}
-                _placeholder={{
-                  color: 'gray.500',
-                }}
-              />
+                  type="email"
+                  placeholder="Your best email"
+                  {...register('email', { required: 'This is required' })}
+                />
               </FormControl>
-              <PasswordField 
+              <PasswordField
                 isRequired
-                placeholder='Password'
-                bg={'gray.100'}
-                border={0}
-                color={'gray.500'}
-                _placeholder={{
-                  color: 'gray.500',
-                }}/>
-              <PasswordField 
+                placeholder="Password"
+                {...register('password', { required: 'This is required' })}
+              />
+              <PasswordField
                 isRequired
-                placeholder='Confirm password'
-                bg={'gray.100'}
-                border={0}
-                color={'gray.500'}
-                _placeholder={{
-                  color: 'gray.500',
-                }}/>
+                placeholder="Confirm password"
+                {...register('confirmPassword', { required: 'This is required' })}
+              />
               <FormControl>
               <FormLabel>Teaching areas</FormLabel>
               <CheckboxGroup colorScheme="pink">
@@ -124,20 +109,23 @@ export default function TeacherLogin() {
               </Box>
             </Stack>
             <Button
-              fontFamily={'heading'}
               mt={8}
-              w={'full'}
+              w="full"
               bgGradient="linear(to-r, red.400,pink.400)"
-              color={'white'}
+              color="white"
               _hover={{
                 bgGradient: 'linear(to-r, red.400,pink.400)',
                 boxShadow: 'xl',
-              }}>
+              }}
+              isLoading={isSubmitting}
+              type="submit">
               Submit
             </Button>
           </Box>
       </Container>
     </Box>
+    </form>
+    
   );
 }
 
