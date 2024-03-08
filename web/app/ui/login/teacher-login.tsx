@@ -55,6 +55,10 @@ export default function TeacherLogin() {
               <Input
                   type="text"
                   placeholder="First and last name"
+                  bg={'gray.100'}
+                border={0}
+                color={'gray.500'}                                 
+                _placeholder={{color: 'gray.500'}}
                   {...register('name', {
                     required: 'This is required',
                     minLength: { value: 4, message: 'Minimum length should be 4' },
@@ -63,19 +67,31 @@ export default function TeacherLogin() {
               </FormControl>
               <FormControl id="email" isRequired>
               <Input
-                  type="email"
-                  placeholder="Your best email"
+                type="email"
+                placeholder="Your best email"
+                bg={'gray.100'}
+                border={0}
+                color={'gray.500'}                                 
+                _placeholder={{color: 'gray.500'}}
                   {...register('email', { required: 'This is required' })}
                 />
               </FormControl>
               <PasswordField
                 isRequired
                 placeholder="Password"
+                bg={'gray.100'}
+                border={0}
+                color={'gray.500'}                                 
+                _placeholder={{color: 'gray.500'}}
                 {...register('password', { required: 'This is required' })}
               />
               <PasswordField
                 isRequired
                 placeholder="Confirm password"
+                bg={'gray.100'}
+                border={0}
+                color={'gray.500'}                                 
+                _placeholder={{color: 'gray.500'}}
                 {...register('confirmPassword', { required: 'This is required' })}
               />
               <FormControl>
