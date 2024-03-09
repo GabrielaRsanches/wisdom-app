@@ -15,7 +15,7 @@ import {
   RadioGroup,
 } from '@chakra-ui/react';
 import { PasswordField } from '@/app/shared/PasswordField';
-import { StudentRegistry } from '@/app/shared/definitions';
+import { StudentRegistry } from '@/app/models/models';
 
 interface GradeOption {
   value: string;
@@ -36,7 +36,7 @@ const gradeOptions: GradeOption[] = [
 
 export default function StudentLogin() {
   const [selectedGrade, setSelectedGrade] = useState<string>('');
-
+  const [formData, setFormData] = useState<StudentRegistry | null>(null);
   const handleChange = (value: string) => {
     setSelectedGrade(value);
   };
@@ -47,12 +47,17 @@ export default function StudentLogin() {
     formState: { isSubmitting, errors },
   } = useForm<StudentRegistry>();
 
-  const onSubmit = (data: StudentRegistry) => {
-    console.log(data); // Handle form submission logic here
+  const onSubmit = async (data: StudentRegistry) => {
+    try {
+      console.log(data); // Store the form data in local state for frontend use
+      setFormData(data);
+    } // Handle form submission logic here 
+    catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
       <Box position="relative">
         <Container as={SimpleGrid} maxW="2xl">
           <Heading
@@ -63,9 +68,9 @@ export default function StudentLogin() {
               account
             </Text>{' '}
           </Heading>
-          <Box as="form" mt={10}>
+          <Box as="form" mt={10} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={4}>
-              <FormControl isRequired>
+              <FormControl isRequired id='name'>
                 <Input
                   type="text"
                   bg={'gray.100'}
@@ -80,7 +85,7 @@ export default function StudentLogin() {
                   })}
                 />
               </FormControl>
-              <FormControl isRequired>
+              <FormControl isRequired id='email'>
                 <Input
                   type="email"
                   placeholder="Your best email"
@@ -93,6 +98,7 @@ export default function StudentLogin() {
                 />
               </FormControl>
               <PasswordField
+                id='password'
                 isRequired
                 placeholder="Password"
                 bg={'gray.100'}
@@ -102,6 +108,7 @@ export default function StudentLogin() {
                 {...register('password', { required: 'This is required' })}
               />
               <PasswordField
+                id='confirm-password'
                 isRequired
                 placeholder="Confirm password"
                 bg={'gray.100'}
@@ -112,7 +119,7 @@ export default function StudentLogin() {
               />
               <FormControl>
                 <FormLabel>What grade are you in?</FormLabel>
-                <RadioGroup colorScheme="pink" value={selectedGrade} onChange={handleChange}>
+                <RadioGroup colorScheme="pink" value={selectedGrade} onChange={handleChange} className='grade'>
                   <Stack spacing={2}>
                     {gradeOptions.map((option) => (
                       <Radio key={option.value} value={option.value}>
@@ -124,6 +131,7 @@ export default function StudentLogin() {
               </FormControl>
             </Stack>
             <Button
+              id='submit'
               mt={8}
               w="full"
               bgGradient="linear(to-r, red.400,pink.400)"
@@ -139,6 +147,5 @@ export default function StudentLogin() {
           </Box>
         </Container>
       </Box>
-    </form>
   );
 }
