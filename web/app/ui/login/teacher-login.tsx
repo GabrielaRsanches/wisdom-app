@@ -16,10 +16,11 @@ import onFileSelected from '@/app/shared/utils';
 import { PasswordField } from '@/app/shared/PasswordField';
 import React,{ useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { TeacherRegistry } from '@/app/shared/definitions';
+import { TeacherRegistry } from '@/app/models/models';
 
 export default function TeacherLogin() {
   const [selectedTeachingArea, setSelectedTeachingArea] = useState<string>('');
+  const [formData, setFormData] = useState<TeacherRegistry | null>(null);
 
   const handleChange = (value: string) => {
     setSelectedTeachingArea(value);
@@ -31,13 +32,19 @@ export default function TeacherLogin() {
     formState: { isSubmitting, errors },
   } = useForm<TeacherRegistry>();
 
-  const onSubmit = (data: TeacherRegistry) => {
-    console.log(data); // Handle form submission logic here
+  const onSubmit = async (data: TeacherRegistry) => {
+    try {
+      console.log(data); // Store the form data in local state for frontend use
+      setFormData(data);
+    } // Handle form submission logic here 
+    catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box position={'relative'}>
+
+      <Box position={'relative'} >
       <Container 
         as={SimpleGrid}
         maxW={'2xl'}
@@ -49,13 +56,14 @@ export default function TeacherLogin() {
               account
             </Text>{' '}
           </Heading>
-          <Box as="form" mt={10}>
+          <Box as="form" mt={10} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={4}>
-              <FormControl isRequired>
+              <FormControl isRequired id="name">
               <Input
-                  type="text"
-                  placeholder="First and last name"
-                  bg={'gray.100'}
+                
+                type="text"
+                placeholder="First and last name"
+                bg={'gray.100'}
                 border={0}
                 color={'gray.500'}                                 
                 _placeholder={{color: 'gray.500'}}
@@ -65,8 +73,9 @@ export default function TeacherLogin() {
                   })}
                 />
               </FormControl>
-              <FormControl id="email" isRequired>
+              <FormControl  isRequired id="email">
               <Input
+                
                 type="email"
                 placeholder="Your best email"
                 bg={'gray.100'}
@@ -77,6 +86,7 @@ export default function TeacherLogin() {
                 />
               </FormControl>
               <PasswordField
+                id='password'
                 isRequired
                 placeholder="Password"
                 bg={'gray.100'}
@@ -86,6 +96,7 @@ export default function TeacherLogin() {
                 {...register('password', { required: 'This is required' })}
               />
               <PasswordField
+                id='confirm-password'
                 isRequired
                 placeholder="Confirm password"
                 bg={'gray.100'}
@@ -96,15 +107,15 @@ export default function TeacherLogin() {
               />
               <FormControl>
               <FormLabel>Teaching areas</FormLabel>
-              <CheckboxGroup colorScheme="pink">
-                <Stack spacing={[1, 1]} direction={['column']}>
-                  <Checkbox>English</Checkbox>
-                  <Checkbox>Math</Checkbox>
-                  <Checkbox>History</Checkbox>
-                  <Checkbox>Geography</Checkbox>
-                  <Checkbox>Science</Checkbox>
-                  <Checkbox>Literature</Checkbox>
-                  <Checkbox>Other Languages</Checkbox>
+              <CheckboxGroup colorScheme="pink" >
+                <Stack spacing={[1, 1]} direction={['column']} className='teaching-areas'>
+                  <Checkbox id='english'>English</Checkbox>
+                  <Checkbox id='math'>Math</Checkbox>
+                  <Checkbox id='History'>History</Checkbox>
+                  <Checkbox id='geography'>Geography</Checkbox>
+                  <Checkbox id='science'>Science</Checkbox>
+                  <Checkbox id='literature'>Literature</Checkbox>
+                  <Checkbox id='other-languages'>Other Languages</Checkbox>
                 </Stack>
               </CheckboxGroup>
                 
@@ -112,9 +123,11 @@ export default function TeacherLogin() {
               <Box>
                 <Text fontFamily={'body'} fontSize={{ base: '1xl' }} marginTop={'1em'}>
               Upload your license legal document
-              <p style={{fontSize: '10px', color:'gray', backgroundColor:'gray.100'}}>This information is secure and will not be shared</p>         
+              
                 </Text>
+                <Text style={{fontSize: '10px', color:'gray', backgroundColor:'gray.100'}}>This information is secure and will not be shared</Text>         
                 <Input 
+                  id='file'
                   bg={'gray.100'}
                   border={0}
                   color={'gray.500'}
@@ -125,6 +138,7 @@ export default function TeacherLogin() {
               </Box>
             </Stack>
             <Button
+              id='submit'
               mt={8}
               w="full"
               bgGradient="linear(to-r, red.400,pink.400)"
@@ -140,7 +154,7 @@ export default function TeacherLogin() {
           </Box>
       </Container>
     </Box>
-    </form>
+
     
   );
 }
