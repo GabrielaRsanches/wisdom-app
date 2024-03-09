@@ -25,30 +25,29 @@ const SideNav: React.FC<SidebarItemProps> = ({ onClick }) => {
 
   return (
   <>
-    <Heading padding={"0.5em"}>WISDOM</Heading>
     <Box position="fixed" width="250px" height='100%' display="flex" 
       flexDirection="column">
-      <Sidebar collapsed={collapsed} backgroundColor='rgba(400, 192, 203, 0.3)' width="100%" style={{height:"82%"}}
+      <Sidebar collapsed={collapsed} backgroundColor='rgba(400, 192, 203, 0.3)' width="100%" style={{height:"88%"}}
       >
         <Menu style={{paddingTop: '5vh', width:"100%" }}  >
           <Stack  style={{width:'100%'}}>
-            {links.map((link) => {
+            {links.map((link, index) => {
               const LinkIcon = link.icon;
               return(
-                <>
-                  <MenuItem style={{alignItems: 'center', width:'100%'}} href={link.href} key={link.name} onClick={onClick}>
+                
+                  <MenuItem key={`${link.name}-${index}`} style={{alignItems: 'center', width:'100%'}} href={link.href} onClick={onClick}>
                     <Flex>
                       {!collapsed && <Text width={'10vh'}>{link.name}</Text>}     
                       <LinkIcon style={{marginLeft: collapsed ? '0' : '10vh', width: '1em', height: '1em'}} />
                     </Flex>
                   </MenuItem>       
-                </>
+                
               )
             })}
           </Stack>
         </Menu>
 
-        <Flex marginTop={'45vh'}>
+        <Flex marginTop={'51vh'}>
           <Button 
             style={{marginLeft: collapsed ? '0' : '0vh'}}
             alignContent={'center'}
