@@ -6,7 +6,7 @@ import {
 import Page from './page'
 import StudentLogin from './ui/login/student-login'
 import TeacherLogin from './ui/login/teacher-login'
-import DashboardPage from './dashboard/page'
+import DashboardPage from './ui/dashboard/page'
 
 const { Button } = chakraTheme.components
 
@@ -22,7 +22,7 @@ const theme = extendBaseTheme({
 function App() {
   return (
     <ChakraBaseProvider theme={theme}>
-      <Page {...Page} />
+      <Page {...Page}  />
     </ChakraBaseProvider>
   )
 }

@@ -5,7 +5,7 @@ export default function FileUpload(){
 }
 
 export function onFileSelected(event: any) {
-  const selectedFile = event.target.files[0];
+  const selectedFile = event.target.files;
   if (selectedFile) {
     // You can now access the selected file and perform further actions, such as uploading it to a server.
     console.log('Selecione o arquivo:', selectedFile);
