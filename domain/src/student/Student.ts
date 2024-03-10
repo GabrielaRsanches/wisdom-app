@@ -1,15 +1,16 @@
+import { UUID } from 'crypto';
 import { Question } from '../question/Question';
-import { Grade } from '../enum';
+import { Grade } from '../shared/enum';
 
 export class Student {
   constructor(
-    private readonly studentId: string,
+    private readonly studentId: UUID,
     private userName: string,
     private password: string,
     private grade: Grade,
     private readonly createdQuestions?: Question[],
   ) {
-    this.studentId = '';
+    this.studentId = `${''}-${''}-${''}-${''}-${''}`;
   }
 
   async changePassword(newPassword: string) {
