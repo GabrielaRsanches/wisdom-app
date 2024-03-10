@@ -1,9 +1,9 @@
 import { IsEmail } from 'class-validator';
 import { Grade, Subject, TeachingArea } from './enum';
-import { Question } from './question/Question';
-import { Student } from './student/Student';
-import { Answer } from './answer/Answer';
-import { Teacher } from './teacher/Teacher';
+import { Question } from '../question/Question';
+import { Student } from '../student/Student';
+import { Answer } from '../answer/Answer';
+import { Teacher } from '../teacher/Teacher';
 export class Email {
   @IsEmail()
   email: string;
