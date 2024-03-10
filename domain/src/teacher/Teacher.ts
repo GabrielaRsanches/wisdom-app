@@ -1,10 +1,11 @@
+import { UUID } from 'crypto';
 import { Question } from '../question/Question';
-import { TeachingArea } from '../enum';
-import { Email } from '../interfaces';
+import { TeachingArea } from '../shared/enum';
+import { Email } from '../shared/interfaces';
 
 export class Teacher {
   constructor(
-    private readonly teacherId: string,
+    private readonly teacherId: UUID,
     private name: string,
     private email: Email,
     private password: string,
@@ -14,7 +15,7 @@ export class Teacher {
     private answeredQuestions?: Question[],
   ) {
     this.score = 0;
-    this.teacherId = '';
+    this.teacherId = `${''}-${''}-${''}-${''}-${''}`;
   }
 
   async createTeacher(
