@@ -16,7 +16,7 @@ import onFileSelected from '@/app/shared/utils';
 import { PasswordField } from '@/app/shared/PasswordField';
 import React,{ useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { TeacherRegistry } from '@/app/models/models';
+import { TeacherRegistry } from '@/app/lib/models';
 
 export default function TeacherLogin() {
   const [selectedTeachingArea, setSelectedTeachingArea] = useState<string>('');

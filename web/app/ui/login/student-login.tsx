@@ -15,7 +15,8 @@ import {
   RadioGroup,
 } from '@chakra-ui/react';
 import { PasswordField } from '@/app/shared/PasswordField';
-import { StudentRegistry } from '@/app/models/models';
+import { StudentInterface } from '../../../../domain/shared/interfaces'
+import { StudentRegistry } from '@/app/lib/models';
 
 interface GradeOption {
   value: string;
