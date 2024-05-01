@@ -1,7 +1,7 @@
 import { UUID } from 'crypto';
 import { Question } from '../question/Question';
-import { TeachingArea } from '../shared/enum';
-import { Email } from '../shared/interfaces';
+import { TeachingArea } from '../../shared/enum';
+import { Email } from '../../shared/interfaces';
 
 export class Teacher {
   constructor(

@@ -1,5 +1,5 @@
 import { Answer } from '../answer/Answer';
-import { Subject } from '../enum';
+import { Subject } from '../../shared/enum';
 import { Student } from '../student/Student';
 import { Teacher } from '../teacher/Teacher';
 
