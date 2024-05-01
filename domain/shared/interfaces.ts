@@ -1,9 +1,9 @@
 import { IsEmail } from 'class-validator';
 import { Grade, Subject, TeachingArea } from './enum';
-import { Question } from '../question/Question';
-import { Student } from '../student/Student';
-import { Answer } from '../answer/Answer';
-import { Teacher } from '../teacher/Teacher';
+import { Question } from '../src/question/Question';
+import { Student } from '../src/student/Student';
+import { Answer } from '../src/answer/Answer';
+import { Teacher } from '../src/teacher/Teacher';
 export class Email {
   @IsEmail()
   email: string;
@@ -20,7 +20,7 @@ export interface TeacherInterface {
   answeredQuestions?: Question[];
 }
 
-export interface StudantInterface {
+export interface StudentInterface {
   readonly studentId: string,
   userName: string,
   password: string,
