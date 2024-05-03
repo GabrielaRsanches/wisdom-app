@@ -1,15 +1,26 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, BadRequestException, NotFoundException } from '@nestjs/common';
 import { StudentService } from './studentService';
 import { CreateStudentDto } from './dto/createStudent';
-import { Student } from './Student';
+import { StudentLoginDto } from './dto/loginStudent';
+import { Student } from './student';
 
-@Controller('teacher')
+@Controller('student')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  @Post()
+  @Post('register')
   async create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
+    const existingStudent = this.studentService.findById(createStudentDto.studentId);
+    if (existingStudent) {
+      throw new BadRequestException('Account already exists');
+    }
     return this.studentService.create(createStudentDto);
+  }
+
+  @Post('login')
+  async login(@Body() loginStudentDto: StudentLoginDto): Promise<Student> {
+    const student = this.studentService.login(loginStudentDto)
+    return student
   }
 
   @Get()
