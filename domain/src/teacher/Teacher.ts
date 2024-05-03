@@ -1,38 +1,45 @@
-import { UUID } from 'crypto';
+
 import { Question } from '../question/Question';
 import { TeachingArea } from '../../shared/enum';
 import { Email } from '../../shared/interfaces';
-
+import { v4 as uuidv4 } from 'uuid';
 export class Teacher {
+  private _teacherId: uuidv4
+  private _password: string
   constructor(
-    private readonly teacherId: UUID,
-    private name: string,
-    private email: Email,
-    private password: string,
-    private credentials: Credential[],
-    private teachingArea: TeachingArea[],
-    private score: number,
-    private answeredQuestions?: Question[],
+    public name: string,
+    public email: Email,
+    password: string, 
+    public credentials: string[],
+    public teachingArea: TeachingArea[],
+    public score: number = 0,
+    public answeredQuestions: Question[] = [],
   ) {
-    this.score = 0;
-    this.teacherId = `${''}-${''}-${''}-${''}-${''}`;
+    this._teacherId = uuidv4();
+    this._password = password;
   }
 
-  async createTeacher(
-    name: string,
-    email: string,
-    password: string,
-    credentials: Credential[],
-    TeachingArea: TeachingArea[],
-  ) {}
-  async editCredentials(credentials: Credential[]) {
+  get teacherId(): string {
+    return this._teacherId;
+  }
+
+  get password(): string {
+    return this._password;
+  }
+
+  async updateCredentials(credentials: string[]) {
     this.credentials = credentials;
   }
+
   async changePassword(newPassword: string) {
-    this.password = newPassword;
+    this._password = newPassword;
   }
+
   async updateEmail(email: Email) {
     this.email = email;
   }
-  async deletedAccount() {}
+
+  async deleteAccount() {
+
+  }
 }
