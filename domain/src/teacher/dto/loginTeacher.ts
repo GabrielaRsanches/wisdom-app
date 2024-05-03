@@ -1,15 +1,14 @@
-import { IsString, IsUUID,  } from "class-validator";
-import { UUID } from "crypto";
-import { Question } from "src/question/Question";
-import { Grade } from "src/shared/enum";
+import { IsEmail, IsUUID,  } from "class-validator";
+import { v4 as uuidv4 } from 'uuid';
+import { Email } from "shared/interfaces";
 
 export class TeacherLoginDto {
 
   @IsUUID()
-  teacherId: UUID;
+  teacherId: uuidv4;
 
-  @IsString()
-  name: string;
+  @IsEmail()
+  email: Email;
 
   password: string
 
