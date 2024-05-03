@@ -1,12 +1,11 @@
-import { IsString, IsUUID,  } from "class-validator";
-import { UUID } from "crypto";
-import { Question } from "src/question/Question";
-import { Grade } from "src/shared/enum";
+import { IsString } from "class-validator";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export class StudentLoginDto {
 
-  @IsUUID()
-  studentId: UUID;
+  @IsString()
+  studentId: uuidv4;
 
   @IsString()
   userName: string;

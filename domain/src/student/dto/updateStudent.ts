@@ -1,11 +1,11 @@
 import { IsString, IsStrongPassword, IsUUID,  } from "class-validator";
-import { UUID } from "crypto";
-import { Grade } from "src/shared/enum";
+import { uuidv4 } from "uuid";
+import { Grade } from "../../../shared/enum";
 
 export class UpdateStudentDto {
 
-  @IsUUID()
-  studentId: UUID;
+  @IsString()
+  studentId: uuidv4;
 
   @IsString()
   userName: string;
