@@ -1,18 +1,39 @@
+import { Question } from 'src/question/Question';
+import { Student } from 'src/student/Student';
+import { v4 as uuidv4 } from 'uuid';
+
 export class Answer {
-  constructor(
-    private readonly studentId: string,
-    private text: string,
-    private answeringTo: string,
-  ) {
-    this.studentId = '';
+  private _answerId: uuidv4;
+  private _text: string;
+  public answeringTo: Question
+
+  constructor(answerId: uuidv4, text: string, answeringTo: Question) {
+    this._answerId = answerId;
+    this._text = text;
+    this.answeringTo = answeringTo;
   }
 
-  async createAnswer(questionId: string, text: string) {
-    this.answeringTo = questionId;
-    this.text = text;
+  get answerId(): Promise<Answer> {
+    return this._answerId;
   }
-  async editAnswer(newText: string) {
+
+  get text(): string {
+    return this._text;
+  }
+
+  set text(value: string) {
+    this._text = value;
+  }
+
+  get getAnsweringTo(): Question {
+    return this.answeringTo;
+  }
+
+  async editAnswer(newText: string): Promise<void> {
     this.text = newText;
   }
-  async deleteAnswer(answerId: string) {}
+
+  async deleteAnswer(): Promise<void> {
+    // Implementation to delete answer
+  }
 }
