@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Question } from './question';
 import { CreateQuestionDto } from './dto/createQuestion';
-import { Answer } from '../answer/Answer';
 import { Student } from '../student/Student';
 
 @Injectable()
@@ -24,12 +23,16 @@ export class QuestionService {
     return this.questions;
   }
 
-  findById(questionId: string): Question {
-    return this.questions.find((question) => question.questionId === questionId);
+  findById(questionId: number): Question {
+    return this.questions.find(
+      (question) => question.getQuestionId === questionId,
+    );
   }
 
-  delete(questionId: string): void {
-    const index = this.questions.findIndex((question) => question.questionId === questionId);
+  delete(questionId: number): void {
+    const index = this.questions.findIndex(
+      (question) => question.getQuestionId === questionId,
+    );
     if (index === -1) {
       throw new NotFoundException('Question not found');
     }

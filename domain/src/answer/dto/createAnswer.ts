@@ -1,9 +1,8 @@
 import { IsString, IsUUID } from 'class-validator';
 import { Question } from 'src/question/Question';
-import { v4 as uuidv4 } from 'uuid';
 export class CreateAnswerDto {
   @IsUUID()
-  answerId: uuidv4;
+  answerId: number;
 
   @IsString()
   text: string;

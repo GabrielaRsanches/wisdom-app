@@ -5,7 +5,7 @@ export enum Subject {
   Geografia = 'Geografia',
   Ciências = 'Ciências',
   Literatura = 'Literatura',
-  Inglês = 'Inglês'
+  Inglês = 'Inglês',
 }
 
 export enum TeachingArea {
@@ -15,7 +15,7 @@ export enum TeachingArea {
   Geografia = 'Geografia',
   Ciências = 'Ciências',
   Literatura = 'Literatura',
-  Inglês = 'Inglês'
+  Inglês = 'Inglês',
 }
 
 export enum Grade {

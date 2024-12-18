@@ -10,7 +10,7 @@ export class Email {
 }
 
 export interface TeacherInterface {
-  readonly teacherId: string;
+  teacherId: number;
   name: string;
   email: Email;
   password: string;
@@ -21,21 +21,20 @@ export interface TeacherInterface {
 }
 
 export interface StudentInterface {
-  readonly studentId: string,
-  userName: string,
-  password: string,
-  grade: Grade,
-  readonly createdQuestions?: Question[]
+  studentId: number;
+  userName: string;
+  password: string;
+  grade: Grade;
+  createdQuestions?: Question[];
 }
 
-export interface QuestionInterface{
-  readonly questionId: string,
-  subject: Subject[],
-  title: string,
-  description: string,
-  madeBy: Student,
-  readonly createdAt: Date,
-  answers: Answer[],
-  readonly answeredBy?: Teacher
+export interface QuestionInterface {
+  questionId: number;
+  subject: Subject[];
+  title: string;
+  description: string;
+  madeBy: Student;
+  createdAt: Date;
+  answers: Answer[];
+  answeredBy?: Teacher;
 }
-

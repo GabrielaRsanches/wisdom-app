@@ -1,4 +1,10 @@
-import { Controller, Get, Post, Body, BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  BadRequestException,
+} from '@nestjs/common';
 import { StudentService } from './studentService';
 import { CreateStudentDto } from './dto/createStudent';
 import { StudentLoginDto } from './dto/loginStudent';
@@ -10,7 +16,9 @@ export class StudentController {
 
   @Post('register')
   async create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
-    const existingStudent = this.studentService.findById(createStudentDto.studentId);
+    const existingStudent = this.studentService.findById(
+      createStudentDto.studentId,
+    );
     if (existingStudent) {
       throw new BadRequestException('Account already exists');
     }
@@ -19,8 +27,8 @@ export class StudentController {
 
   @Post('login')
   async login(@Body() loginStudentDto: StudentLoginDto): Promise<Student> {
-    const student = this.studentService.login(loginStudentDto)
-    return student
+    const student = this.studentService.login(loginStudentDto);
+    return student;
   }
 
   @Get()

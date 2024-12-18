@@ -4,7 +4,7 @@ import { Student } from './Student';
 import { StudentController } from './studentController';
 
 @Module({
-  imports: [Student, CreateStudentDto, StudentLoginDto ],
+  imports: [Student, CreateStudentDto, StudentLoginDto],
   controllers: [StudentController],
 })
 export class StudentModule {}

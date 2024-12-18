@@ -4,7 +4,7 @@ import { Question } from 'src/question/Question';
 export class UpdateAnswerDto {
   @IsOptional()
   @IsString()
-  text?: string;
+  description?: string;
 
-  answeringTo: Question
+  answeringTo: Question;
 }

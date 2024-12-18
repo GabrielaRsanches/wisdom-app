@@ -1,14 +1,11 @@
-import { IsEmail, IsNumber, IsString, IsStrongPassword } from "class-validator";
-import { v4 as uuidv4 } from 'uuid';
-import { Email } from "shared/interfaces";
-import { Question } from "src/question/Question";
-import { TeachingArea } from "../../../shared/enum";
-
+import { IsEmail, IsNumber, IsString, IsStrongPassword } from 'class-validator';
+import { Email } from 'shared/interfaces';
+import { Question } from 'src/question/Question';
+import { TeachingArea } from '../../../shared/enum';
 
 export class CreateTeacherDto {
-
   @IsString()
-  teacherId: uuidv4;
+  teacherId: number;
 
   @IsString()
   name: string;
@@ -17,15 +14,14 @@ export class CreateTeacherDto {
   password: string;
 
   @IsEmail()
-  email: Email
+  email: Email;
 
   credentials: string[];
 
   teachingArea: TeachingArea[];
 
   @IsNumber()
-  score?: number = 0
+  score?: number = 0;
 
-  answeredQuestions?: Question[] = []
-
+  answeredQuestions?: Question[] = [];
 }
