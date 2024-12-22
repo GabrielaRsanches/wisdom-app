@@ -1,5 +1,4 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -28,10 +27,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react',
+              '@babel/preset-typescript',
+            ],
+          },
         },
       },
       {
@@ -41,8 +47,8 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({ template: './public/index.html' }),
   ],
   mode: 'development',
+  devtool: 'source-map',
 };
