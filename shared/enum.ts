@@ -1,4 +1,4 @@
-export enum Subject {
+export enum Subject  {
   Portuguese = 'Portuguese',
   Matemática = 'Matemática',
   História = 'História',
