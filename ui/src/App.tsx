@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import TeacherDashboard from './components/Teacher/components/TeacherDashboard/TeacherDashboard';
-import TeacherSignUp from './components/Teacher/pages/TeacherSignIn/TeacherSignUp';
-import MainHeader from './components/Teacher/components/MainHeader/MainHeader';
+import TeacherDashboard from './components/Teacher/pages/TeacherDashboard/TeacherDashboard';
+import TeacherSignUp from './components/Teacher/pages/TeacherSignUp/TeacherSignUp';
+import MainHeader from './components/MainHeader/MainHeader';
 
 const App = () => {
   return (
