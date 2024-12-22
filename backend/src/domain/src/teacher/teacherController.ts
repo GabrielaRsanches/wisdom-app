@@ -23,7 +23,10 @@ export class TeacherController {
   getDashboard() {
     return { message: 'Teacher Dashboard Endpoint' };
   }
-
+  @Get('login')
+  getLogin() {
+    return { message: 'Teacher Login Endpoint' };
+  }
   // @Post('sign-up')
   // async create(@Body() createTeacherDto: CreateTeacherDto): Promise<Teacher> {
   //   const existingTeacher = this.teacherService.findById(
