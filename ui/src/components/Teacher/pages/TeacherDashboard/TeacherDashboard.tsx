@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box, Card, CardBody, Stack, StackDivider } from '@chakra-ui/react';
 import TeacherSidebar from '../../components/TeacherSidebar/TeacherSidebar';
 
 interface TeacherDashboardProps {
@@ -8,17 +7,9 @@ interface TeacherDashboardProps {
 
 const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ children }) => {
   return (
-    <Card>
-      <CardBody>
-        <Stack divider={<StackDivider />} spacing='4'>
-        <Box>
-          <TeacherSidebar onClick={function () {} }/>
-        <React.Fragment>{children}</React.Fragment>
-      </Box>
-      </Stack>
-    </CardBody>
-  </Card>
-   
+    <React.Fragment>
+    <TeacherSidebar onClick={function () {} }/>
+    </React.Fragment>
   );
 }
 
