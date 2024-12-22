@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["shared/*"]
+    },
     "target": "ES6",
     "module": "ESNext",
     "moduleResolution": "node",

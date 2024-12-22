@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "../",
     "declaration": false,
     "sourceMap": false,
     "removeComments": true,
@@ -17,5 +17,5 @@
     "types": ["jest", "node", "react"],
   },
   "include": ["src/**/*", "src/**/*.ts",
-    "src/**/*.tsx"],
+    "src/**/*.tsx", "../../shared/**/*"],
 }
