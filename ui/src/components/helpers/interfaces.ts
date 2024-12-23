@@ -1,7 +1,6 @@
-import { Teacher } from '../../../../backend/src/domain/src/teacher/Teacher'
-import { TeachingArea, Grade } from '../../../../shared/enum'
-import { Email } from '../../../../shared/interfaces'; 
-import { Student } from '../../../../backend/domain/src/student/Student';
+
+import { TeachingArea, Grade } from '@shared/enum'
+import { StudentInterface, TeacherInterface, Email } from '@shared/interfaces';
 import FileUpload, { ConfirmedPassword } from '../helpers/utils';
 
 interface TeacherRegistry {
@@ -25,12 +24,19 @@ interface StudentRegistry {
   
 }
 
+
+export interface TeacherLoginInterface {
+  email: Email;
+  password: string;
+  forgotPassword?: () => {};
+}
+
 interface Question {
-  madeBy: Student;
+  madeBy: StudentInterface;
   title: string;
   description: string;
   answer?: Answer[];
-  answeredBy?: Teacher
+  answeredBy?: TeacherInterface
 }
 
 interface Answer {

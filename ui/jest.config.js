@@ -5,8 +5,8 @@ module.exports = {
   rootDir: './src',
   testRegex: '.*\\.test\\.(ts|tsx)$',
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
-    '^.+\\.(js|jsx)$': 'babel-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': 'ts-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   collectCoverage: true,
