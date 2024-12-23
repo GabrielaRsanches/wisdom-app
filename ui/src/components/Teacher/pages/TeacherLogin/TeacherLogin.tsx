@@ -38,16 +38,16 @@ const TeacherLogin = () => {
   return (
     <Box position={'relative'} >
       <Container as={SimpleGrid} maxW={'2xl'}>
-        <S.SignUpTitleContainer>
+        <S.LoginTitleContainer>
           <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
             <Text as={'span'} bgGradient="linear(to-r, red.400,pink.400)" bgClip="text">
               Welcome teacher!
             </Text>
           </Heading>
-        </S.SignUpTitleContainer>
+        </S.LoginTitleContainer>
 
         <Box as="form" mt={10}>
-          <S.SignUpFormContainer>
+          <S.LoginFormContainer>
             <Stack spacing={4}>
               <FormControl isRequired id="email">
                 <Input
@@ -58,7 +58,7 @@ const TeacherLogin = () => {
                   color={'gray.500'}
                   _placeholder={{ color: 'gray.500' }}
                   {...register('email', {
-                    required: 'This is required'
+                    required: 'Email is required'
                   })}
                 />
               </FormControl>
@@ -71,7 +71,7 @@ const TeacherLogin = () => {
                 border={0}
                 color={'gray.500'}
                 _placeholder={{ color: 'gray.500' }}
-                {...register('password', { required: 'This is required' })}
+                {...register('password', { required: 'Password is required' })}
               />
             </Stack>
             <S.ForgotYourPasswordContainer>
@@ -94,7 +94,7 @@ const TeacherLogin = () => {
               onClick={handleSubmit(handleLogin)}>
               Login
             </S.SubmitButton>
-          </S.SignUpFormContainer>
+          </S.LoginFormContainer>
         </Box>
       </Container>
     </Box>

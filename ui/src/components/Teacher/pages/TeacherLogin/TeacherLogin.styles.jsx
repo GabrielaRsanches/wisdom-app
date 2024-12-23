@@ -10,7 +10,7 @@ const breakpoints = {
   desktop: '1024px',
 };
 
-export const SignUpTitleContainer = styled.div`
+export const LoginTitleContainer = styled.div`
   display: inline-flex;
   justify-content: center;
   padding: 16px;
@@ -25,7 +25,7 @@ export const SignUpTitleContainer = styled.div`
   }
 `;
 
-export const SignUpFormContainer = styled.div`
+export const LoginFormContainer = styled.div`
   display: flex-box;
   align-items: center;
   width: 100%;
