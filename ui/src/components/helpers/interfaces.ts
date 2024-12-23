@@ -20,8 +20,6 @@ interface StudentRegistry {
   password: string;
   confirmPassword: ConfirmedPassword;
   grade: Grade;
-
-  
 }
 
 
