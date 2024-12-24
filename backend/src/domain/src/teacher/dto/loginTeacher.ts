@@ -1,12 +1,8 @@
-import { IsEmail, IsUUID } from 'class-validator';
-import { Email } from '../../../../../../shared/interfaces';
+import { IsEmail } from 'class-validator';
 
 export class TeacherLoginDto {
-  @IsUUID()
-  teacherId: number;
-
   @IsEmail()
-  email: Email;
+  email: string;
 
   password: string;
 }

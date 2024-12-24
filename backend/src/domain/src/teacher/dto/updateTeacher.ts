@@ -1,16 +1,15 @@
 import { TeachingArea } from '../../../../../../shared/enum';
-import { Email } from '../../../../../../shared/interfaces';
 
 export class UpdateTeacherDto {
   updateName?: string;
-  updateEmail?: Email;
+  updateEmail?: string;
   updateCredentials?: string[];
   updatePassword?: string;
   updateTeachingAreas?: TeachingArea[];
 
   constructor(
     updateName?: string,
-    updateEmail?: Email,
+    updateEmail?: string,
     updateCredentials?: string[],
     updatePassword?: string,
     updateTeachingAreas?: TeachingArea[],
