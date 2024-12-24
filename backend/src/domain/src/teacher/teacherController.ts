@@ -1,19 +1,17 @@
 import {
   Controller,
   Get,
-  // Post,
-  // Body,
+  Post,
+  Body,
   // BadRequestException,
   // NotFoundException,
 } from '@nestjs/common';
 
-// import { CreateTeacherDto } from './dto/createTeacher';
-// import { Teacher } from './teacher';
-// import { TeacherLoginDto } from './dto/loginTeacher';
-
+import { TeacherLoginDto } from './dto/loginTeacher';
+import { TeacherService } from './teacherService';
 @Controller('teacher')
 export class TeacherController {
-  constructor() {}
+  constructor(private readonly teacherService: TeacherService) {}
 
   @Get('sign-up')
   getSignUp() {
@@ -23,10 +21,20 @@ export class TeacherController {
   getDashboard() {
     return { message: 'Teacher Dashboard Endpoint' };
   }
-  @Get('login')
-  getLogin() {
-    return { message: 'Teacher Login Endpoint' };
+  @Post('login')
+  async login(@Body() loginTeacherDto: TeacherLoginDto) {
+    const { email, password } = loginTeacherDto;
+
+    const teacher = await this.teacherService.findByEmailAndPassword(
+      email,
+      password,
+    );
+    if (!teacher) {
+      throw new Error('Invalid email or password');
+    }
+    return { message: 'Login successful', teacher };
   }
+
   // @Post('sign-up')
   // async create(@Body() createTeacherDto: CreateTeacherDto): Promise<Teacher> {
   //   const existingTeacher = this.teacherService.findById(
