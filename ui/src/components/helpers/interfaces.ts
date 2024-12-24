@@ -1,6 +1,6 @@
 
 import { TeachingArea, Grade } from '@shared/enum'
-import { StudentInterface, TeacherInterface, Email } from '@shared/interfaces';
+import { StudentInterface, TeacherInterface } from '@shared/interfaces';
 import FileUpload, { ConfirmedPassword } from '../helpers/utils';
 
 interface TeacherRegistry {
@@ -16,7 +16,7 @@ interface TeacherRegistry {
 
 interface StudentRegistry {
   name: string;
-  email: Email;
+  email: string;
   password: string;
   confirmPassword: ConfirmedPassword;
   grade: Grade;
@@ -24,9 +24,8 @@ interface StudentRegistry {
 
 
 export interface TeacherLoginInterface {
-  email: Email;
+  email: string;
   password: string;
-  forgotPassword?: () => {};
 }
 
 interface Question {

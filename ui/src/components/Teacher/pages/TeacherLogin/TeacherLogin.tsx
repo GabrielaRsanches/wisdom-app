@@ -8,16 +8,19 @@ import {
   SimpleGrid,
   Stack,
   Text,
-  Link
-} from '@chakra-ui/react'
+  Link,
+} from '@chakra-ui/react';
 import { PasswordField } from '../../../helpers/PasswordField';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { TeacherLoginInterface } from 'ui/src/components/helpers/interfaces';
-import * as S from './TeacherLogin.styles'
+import { useTeacherLogin } from '../../../../hooks/useTeacherLogin';
+import { useNavigate } from 'react-router-dom';
+import * as S from './TeacherLogin.styles';
 
 const TeacherLogin = () => {
-  const [formData, setFormData] = useState<TeacherLoginInterface | null>(null);
+  const [loginError, setLoginError] = useState('');
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -25,28 +28,41 @@ const TeacherLogin = () => {
     formState: { isSubmitting, errors },
   } = useForm<TeacherLoginInterface>();
 
-  const handleLogin = async (data: TeacherLoginInterface) => {
-    try {
-      console.log(data);
-      setFormData(data);
-    }
-    catch (error) {
-      console.error(error);
-    }
+  const { mutate: loginTeacher } = useTeacherLogin({
+    onSuccess: (data: any) => {
+      console.log('Login successful:', data);
+      setLoginError('');
+
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('teacherInfo', JSON.stringify(data.teacher));
+      
+      navigate('/teacher/dashboard');
+    },
+    onError: (error: any) => {
+      setLoginError(error?.message || 'Login failed. Please try again.');
+    },
+  });
+
+  const handleLogin = (data: TeacherLoginInterface) => {
+    setLoginError('');
+    loginTeacher(data);
   };
 
   return (
-    <Box position={'relative'} >
+    <Box position={'relative'}>
       <Container as={SimpleGrid} maxW={'2xl'}>
         <S.LoginTitleContainer>
-          <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+          <Heading
+            lineHeight={1.1}
+            fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}
+          >
             <Text as={'span'} bgGradient="linear(to-r, red.400,pink.400)" bgClip="text">
               Welcome teacher!
             </Text>
           </Heading>
         </S.LoginTitleContainer>
 
-        <Box as="form" mt={10}>
+        <Box as="form" mt={10} onSubmit={handleSubmit(handleLogin)}>
           <S.LoginFormContainer>
             <Stack spacing={4}>
               <FormControl isRequired id="email">
@@ -58,9 +74,14 @@ const TeacherLogin = () => {
                   color={'gray.500'}
                   _placeholder={{ color: 'gray.500' }}
                   {...register('email', {
-                    required: 'Email is required'
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                      message: 'Please enter a valid email address',
+                    },
                   })}
                 />
+                {errors.email && <Text color="red.500">{errors.email.message}</Text>}
               </FormControl>
 
               <PasswordField
@@ -73,25 +94,28 @@ const TeacherLogin = () => {
                 _placeholder={{ color: 'gray.500' }}
                 {...register('password', { required: 'Password is required' })}
               />
+              {errors.password && <Text color="red.500">{errors.password.message}</Text>}
             </Stack>
-            <S.ForgotYourPasswordContainer>
-              
-            <Link variant="underline"
-            href=""
-            color="red.400">Forgot your password ?</Link>
 
+            {loginError && <Text color="red.500">{loginError}</Text>}
+
+            <S.ForgotYourPasswordContainer>
+              <Link variant="underline" href="" color="red.400">
+                Forgot your password?
+              </Link>
             </S.ForgotYourPasswordContainer>
-     
-            <S.SubmitButton bgGradient="linear(to-r, red.400,pink.400)"
+
+            <S.SubmitButton
+              bgGradient="linear(to-r, red.400,pink.400)"
               color="white"
               _hover={{
-                id:'submit',
+                id: 'submit',
                 bgGradient: 'linear(to-r, red.400,pink.400)',
                 boxShadow: 'xl',
-              }} 
-              isLoading={isSubmitting} 
-              type="submit" 
-              onClick={handleSubmit(handleLogin)}>
+              }}
+              isLoading={isSubmitting}
+              type="submit"
+            >
               Login
             </S.SubmitButton>
           </S.LoginFormContainer>
