@@ -1,5 +1,5 @@
 import axiosInstance from '../config/axiosConfig'
-import { TeacherLoginInterface } from 'ui/src/components/helpers/interfaces';
+import { TeacherLoginInterface, TeacherRegistry } from 'ui/src/components/helpers/interfaces';
 
 export const fetchTeacherSignUp = async () => {
   const response = await axiosInstance.get('http://localhost:8080/teacher/sign-up');
@@ -13,5 +13,10 @@ export const fetchTeacherDashboard = async () => {
 
 export const teacherLogin = async (data: TeacherLoginInterface) => {
   const response = await axiosInstance.post('http://localhost:3000/teacher/login', data);
+  return response.data;
+};
+
+export const teacherSignUp = async (data: TeacherRegistry) => {
+  const response = await axiosInstance.post('http://localhost:3000/teacher/sign-up', data);
   return response.data;
 };
