@@ -34,3 +34,14 @@ export interface QuestionInterface {
   answers: Answer[];
   answeredBy?: Teacher;
 }
+
+export interface Credential {
+  id: string;
+  name: string;
+  type: string;
+  url: string;
+  uploadedAt: Date;
+  isVerified: boolean;
+  verifiedAt?: Date;
+  remarks?: string;
+}
