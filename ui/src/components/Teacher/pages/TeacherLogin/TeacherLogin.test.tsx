@@ -31,7 +31,7 @@ describe('TeacherLogin Component', () => {
   it('should render the forgot password link', () => {
     renderComponent();
 
-    expect(screen.getByText(/Forgot your password \?/i)).toBeInTheDocument();
+    expect(screen.getByText('Forgot your password?')).toBeInTheDocument();
   });
 
   it('should render the submit button', () => {

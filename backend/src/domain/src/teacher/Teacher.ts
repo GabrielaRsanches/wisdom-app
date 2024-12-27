@@ -1,28 +1,28 @@
 import { Question } from '../question/Question';
 import { TeachingArea } from '../../../../../shared/enum';
-import { Email } from '../../../../../shared/interfaces';
-export class Teacher {
+import { TeacherInterface } from '../../../../../shared/interfaces';
+export class Teacher implements TeacherInterface {
   private readonly teacherId: number;
 
   constructor(
     public name: string,
-    public email: Email,
+    public email: string,
     private password: string,
-    public credentials: string[],
+    public credentials: Credential[],
     public teachingArea: TeachingArea[],
     public score: number = 0,
     public answeredQuestions: Question[] = [],
   ) {}
 
-  get getTeacherId(): number {
+  public getTeacherId(): number {
     return this.teacherId;
   }
 
-  get getPassword(): string {
+  public getPassword(): string {
     return this.password;
   }
 
-  async updateCredentials(credentials: string[]) {
+  async updateCredentials(credentials: Credential[]) {
     this.credentials = credentials;
   }
 
@@ -30,7 +30,7 @@ export class Teacher {
     this.password = newPassword;
   }
 
-  async updateEmail(email: Email) {
+  async updateEmail(email: string) {
     this.email = email;
   }
 

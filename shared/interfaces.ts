@@ -5,22 +5,13 @@ import { Answer } from '../backend/src/domain/src/answer/Answer';
 import { Teacher } from '../backend/src/domain/src/teacher/Teacher';
 import { IsEmail } from 'class-validator';
 
-export class Email {
-  @IsEmail()
-  email: string;
-
-  constructor(email: string) {
-    this.email = email;
-  }
-}
-
 export interface TeacherInterface {
-  teacherId: number;
+  getTeacherId(): number;
   name: string;
-  email: Email;
-  password: string;
+  email: string;
+  getPassword(): string;
   credentials: Credential[];
-  teachingArea: TeachingArea;
+  teachingArea: TeachingArea[];
   score: number;
   answeredQuestions?: Question[];
 }

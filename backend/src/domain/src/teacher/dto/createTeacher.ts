@@ -1,5 +1,4 @@
 import { IsEmail, IsNumber, IsString, IsStrongPassword } from 'class-validator';
-import { Email } from '../../../../../../shared/interfaces';
 import { Question } from '../../question/Question';
 import { TeachingArea } from '../../../../../../shared/enum';
 
@@ -14,9 +13,9 @@ export class CreateTeacherDto {
   password: string;
 
   @IsEmail()
-  email: Email;
+  email: string;
 
-  credentials: string[];
+  credentials: Credential[];
 
   teachingArea: TeachingArea[];
 

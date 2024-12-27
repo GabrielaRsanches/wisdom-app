@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
-import { CreateTeacherDto, TeacherLoginDto } from './dto';
 import { Teacher } from './Teacher';
 import { TeacherController } from './teacherController';
-import { StudentService } from '../student/studentService';
-
+import { TeacherService } from './teacherService';
 @Module({
-  imports: [Teacher, CreateTeacherDto, TeacherLoginDto],
+  imports: [Teacher],
   controllers: [TeacherController],
-  providers: [StudentService],
+  providers: [TeacherService],
 })
 export class TeacherModule {}
