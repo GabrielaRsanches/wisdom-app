@@ -3,10 +3,11 @@ import {
   Get,
   Post,
   Body,
-  // BadRequestException,
+  BadRequestException,
   // NotFoundException,
 } from '@nestjs/common';
-
+import { Teacher } from './Teacher';
+import { CreateTeacherDto } from './dto';
 import { TeacherLoginDto } from './dto/loginTeacher';
 import { TeacherService } from './teacherService';
 @Controller('teacher')
@@ -35,28 +36,18 @@ export class TeacherController {
     return { message: 'Login successful', teacher };
   }
 
-  // @Post('sign-up')
-  // async create(@Body() createTeacherDto: CreateTeacherDto): Promise<Teacher> {
-  //   const existingTeacher = this.teacherService.findById(
-  //     createTeacherDto.teacherId,
-  //   );
-  //   if (existingTeacher) {
-  //     throw new BadRequestException('Account already exists');
-  //   }
-  //   return this.teacherService.create(createTeacherDto);
-  // }
+  @Post('sign-up')
+  async create(@Body() createTeacherDto: CreateTeacherDto): Promise<Teacher> {
+    const existingTeacher = await this.teacherService.findByEmail(
+      createTeacherDto.email,
+    );
 
-  // @Post('login')
-  // async login(@Body() loginTeacherDto: TeacherLoginDto): Promise<Teacher> {
-  //   const teacher = this.teacherService.findByEmailAndPassword(
-  //     loginTeacherDto.email,
-  //     loginTeacherDto.password,
-  //   );
-  //   if (!teacher) {
-  //     throw new NotFoundException('Teacher not found');
-  //   }
-  //   return teacher;
-  // }
+    if (existingTeacher) {
+      throw new BadRequestException('Account already exists');
+    }
+
+    return this.teacherService.create(createTeacherDto);
+  }
 
   // @Get()
   // async findAll(): Promise<Teacher[]> {
