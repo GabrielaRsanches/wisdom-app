@@ -1,6 +1,6 @@
 import { Question } from '../question/Question';
 import { TeachingArea } from '../../../../../shared/enum';
-import { TeacherInterface } from '../../../../../shared/interfaces';
+import { TeacherInterface, Credential } from '../../../../../shared/interfaces';
 export class Teacher implements TeacherInterface {
   private readonly teacherId: number;
 
