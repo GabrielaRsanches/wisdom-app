@@ -10,23 +10,30 @@ import {
   Stack,
   Text,
   Checkbox,
-  CheckboxGroup
-} from '@chakra-ui/react'
-import onFileSelected from '../../../helpers/utils';
+  CheckboxGroup,
+  useToast
+} from '@chakra-ui/react';
+import onFileSelected, { ConfirmedPassword } from '../../../helpers/utils';
 import { PasswordField } from '../../../helpers/PasswordField';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { TeacherRegistry } from '../../../helpers/interfaces';
-import { TeachingArea } from '../../../../../../shared/enum';
-import * as S from './TeacherSignUp.styles'
+import { TeachingArea } from '../../../helpers/enum'; 
+import * as S from './TeacherSignUp.styles';
+import { usePostCreateTeacher } from '../../../../hooks/usePostCreateTeacher';
 
 const TeacherSignUp = () => {
-  const [selectedTeachingArea, setSelectedTeachingArea] = useState<string>('');
-  const [formData, setFormData] = useState<TeacherRegistry | null>(null);
+  const [selectedCredential, setSelectedCredential] = useState<Credential[]>([]);
+  const [selectedTeachingArea, setSelectedTeachingArea] = useState<TeachingArea[]>([]);
   const teachingAreas = Object.values(TeachingArea);
+  const toast = useToast();
 
-  const handleChange = (value: string) => {
-    setSelectedTeachingArea(value);
+  const handleCredentialChange = (value: Credential[]) => {
+    setSelectedCredential(value);
+  };
+
+  const handleTeachingAreaChange = (areas: TeachingArea[]) => {
+    setSelectedTeachingArea(areas);
   };
 
   const {
@@ -35,18 +42,48 @@ const TeacherSignUp = () => {
     formState: { isSubmitting, errors },
   } = useForm<TeacherRegistry>();
 
-  const onSubmit = async (data: TeacherRegistry) => {
-    try {
-      console.log(data); // Store the form data in local state for frontend use
-      setFormData(data);
-    } // Handle form submission logic here 
-    catch (error) {
-      console.error(error);
+  const { mutate: createTeacher } = usePostCreateTeacher({
+    onSuccess: () => {
+      toast({
+        title: 'Account created.',
+        description: 'Your account has been successfully created.',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Error.',
+        description: error.response?.data?.message || 'An error occurred.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+
+  const onSubmit = async (data: any) => {
+    const confirmedPassword = new ConfirmedPassword(data.password, data.confirmPassword);
+    if (!confirmedPassword.arePasswordsMatching(data.password, data.confirmPassword)) {
+      toast({
+        title: 'Password mismatch',
+        description: 'Password and confirm password need to have the same value',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
     }
+
+    createTeacher({
+      ...data,
+      teachingAreas: selectedTeachingArea,
+    });
   };
 
   return (
-    <Box position={'relative'} >
+    <Box position={'relative'}>
       <Container as={SimpleGrid} maxW={'2xl'}>
         <S.SignUpTitleContainer>
           <Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
@@ -111,9 +148,13 @@ const TeacherSignUp = () => {
                 <S.TeachingAreaContainer>
                   <FormLabel>Teaching areas</FormLabel>
                   <S.TeachingAreaOptionsContainer>
-                    <CheckboxGroup colorScheme="pink">
+                    <CheckboxGroup
+                      colorScheme="pink"
+                      value={selectedTeachingArea} // Bind value to selectedTeachingArea
+                      onChange={handleTeachingAreaChange} // Update state when checkboxes are selected
+                    >
                       {teachingAreas.map((area) => (
-                        <Checkbox key={area} id={area}>
+                        <Checkbox key={area} value={area}>
                           {area}
                         </Checkbox>
                       ))}
@@ -132,7 +173,7 @@ const TeacherSignUp = () => {
                   color={'gray.500'}
                   _placeholder={{ color: 'gray.500' }}
                   type="file"
-                  onClick={onFileSelected}
+                  onChange={onFileSelected}
                   marginTop={'1em'}
                 />
               </S.FileInputWrapper>
