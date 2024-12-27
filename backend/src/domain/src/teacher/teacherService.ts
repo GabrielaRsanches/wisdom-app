@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Teacher } from './Teacher';
 import { TeachingArea } from '../../../../../shared/enum';
+import { CreateTeacherDto } from './dto/createTeacher';
 
 @Injectable()
 export class TeacherService {
@@ -36,5 +37,23 @@ export class TeacherService {
       throw new NotFoundException('Invalid credentials');
     }
     return teacher;
+  }
+
+  async findByEmail(email: string): Promise<Teacher | undefined> {
+    return this.teachers.find((t) => t.email === email);
+  }
+
+  async create(createTeacherDto: CreateTeacherDto): Promise<Teacher> {
+    const newTeacher = new Teacher(
+      createTeacherDto.name,
+      createTeacherDto.email,
+      createTeacherDto.password,
+      createTeacherDto.credentials,
+      createTeacherDto.teachingArea,
+      createTeacherDto.score || 0,
+      createTeacherDto.answeredQuestions || [],
+    );
+    this.teachers.push(newTeacher);
+    return newTeacher;
   }
 }

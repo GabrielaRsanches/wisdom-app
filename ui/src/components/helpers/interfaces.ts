@@ -1,17 +1,15 @@
 
 import { TeachingArea, Grade } from '@shared/enum'
-import { StudentInterface, TeacherInterface } from '@shared/interfaces';
-import FileUpload, { ConfirmedPassword } from '../helpers/utils';
+import { Credential, StudentInterface, TeacherInterface } from '@shared/interfaces';
+import { ConfirmedPassword } from '../helpers/utils';
 
 interface TeacherRegistry {
-  teacherId: string;
   name: string;
   email: string;
   password: string; 
   confirmPassword: string;
   teachingAreas: TeachingArea[];
-  credentials: typeof FileUpload;
-  error: {}
+  credentials: Credential;
 }
 
 interface StudentRegistry {
