@@ -15,12 +15,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { TeacherLoginInterface } from 'ui/src/components/helpers/interfaces';
 import { useTeacherLogin } from '../../../../hooks/useTeacherLogin';
-import { useNavigate } from 'react-router-dom';
 import * as S from './TeacherLogin.styles';
 
 const TeacherLogin = () => {
   const [loginError, setLoginError] = useState('');
-  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -36,7 +34,7 @@ const TeacherLogin = () => {
       localStorage.setItem('loggedIn', 'true');
       localStorage.setItem('teacherInfo', JSON.stringify(data.teacher));
       
-      navigate('/teacher/dashboard');
+      window.location.href = '/teacher/dashboard';
     },
     onError: (error: any) => {
       setLoginError(error?.message || 'Login failed. Please try again.');
