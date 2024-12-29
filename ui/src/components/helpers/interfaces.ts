@@ -9,7 +9,7 @@ interface TeacherRegistry {
   password: string; 
   confirmPassword: string;
   teachingAreas: TeachingArea[];
-  credentials: Credential;
+  credentials: Credential[];
 }
 
 interface StudentRegistry {

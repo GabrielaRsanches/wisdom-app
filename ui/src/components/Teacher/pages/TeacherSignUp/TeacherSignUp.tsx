@@ -79,6 +79,7 @@ const TeacherSignUp = () => {
     createTeacher({
       ...data,
       teachingAreas: selectedTeachingArea,
+      credentials: selectedCredential,
     });
   };
 

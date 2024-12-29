@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { TeacherModule } from './domain/src/teacher/teacherModule';
+import { DatabaseModule } from './infra/dataSource.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { TeacherModule } from './domain/src/teacher/teacherModule';
       rootPath: join(__dirname, '..', '../../ui', 'dist'),
       exclude: ['/api*'],
     }),
+    DatabaseModule,
   ],
 })
 export class AppModule {}

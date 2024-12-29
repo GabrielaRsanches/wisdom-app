@@ -18,7 +18,7 @@ describe('TeacherService', () => {
 
       const result = await fetchTeacherSignUp();
 
-      expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:8080/teacher/sign-up');
+      expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:8081/teacher/sign-up');
       expect(result).toEqual(mockResponse.data);
     });
 
@@ -37,7 +37,7 @@ describe('TeacherService', () => {
 
       const result = await fetchTeacherDashboard();
 
-      expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:8080/teacher/dashboard');
+      expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:8081/teacher/dashboard');
       expect(result).toEqual(mockResponse.data);
     });
 

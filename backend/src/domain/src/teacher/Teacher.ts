@@ -1,18 +1,27 @@
 import { Question } from '../question/Question';
 import { TeachingArea } from '../../../../../shared/enum';
 import { TeacherInterface, Credential } from '../../../../../shared/interfaces';
+import bcrypt from 'bcrypt';
+
 export class Teacher implements TeacherInterface {
   private readonly teacherId: number;
+  private password: string;
 
   constructor(
     public name: string,
     public email: string,
-    private password: string,
+    password: string,
     public credentials: Credential[],
-    public teachingArea: TeachingArea[],
+    public teachingAreas: TeachingArea[],
     public score: number = 0,
     public answeredQuestions: Question[] = [],
-  ) {}
+  ) {
+    this.password = password;
+  }
+
+  async comparePassword(password: string): Promise<boolean> {
+    return bcrypt.compare(password, this.password);
+  }
 
   public getTeacherId(): number {
     return this.teacherId;

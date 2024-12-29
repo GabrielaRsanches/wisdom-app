@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { teacherSignUp } from '../services/TeacherService';
 import { TeachingArea } from '@shared/enum';
+import { Credential } from '@shared/interfaces';
 
 /**
  * Custom hook for creating a teacher.
@@ -8,7 +9,7 @@ import { TeachingArea } from '@shared/enum';
  */
 export const usePostCreateTeacher = (options = {}) => {
   return useMutation({
-    mutationFn: (data: { name: string; email: string; password: string; confirmPassword: string, teachingAreas: TeachingArea[], credentials: Credential }) =>
+    mutationFn: (data: { name: string; email: string; password: string; confirmPassword: string, teachingAreas: TeachingArea[], credentials: Credential[] }) =>
       teacherSignUp(data),
     mutationKey: ['teacher', 'create'],
     ...options,

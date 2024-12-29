@@ -11,7 +11,7 @@ export interface TeacherInterface {
   email: string;
   getPassword(): string;
   credentials: Credential[];
-  teachingArea: TeachingArea[];
+  teachingAreas: TeachingArea[];
   score: number;
   answeredQuestions?: Question[];
 }

@@ -2,12 +2,12 @@ import axiosInstance from '../config/axiosConfig'
 import { TeacherLoginInterface, TeacherRegistry } from 'ui/src/components/helpers/interfaces';
 
 export const fetchTeacherSignUp = async () => {
-  const response = await axiosInstance.get('http://localhost:8080/teacher/sign-up');
+  const response = await axiosInstance.get('http://localhost:8081/teacher/sign-up');
   return response.data;
 };
 
 export const fetchTeacherDashboard = async () => {
-  const response = await axiosInstance.get('http://localhost:8080/teacher/dashboard');
+  const response = await axiosInstance.get('http://localhost:8081/teacher/dashboard');
   return response.data;
 };
 

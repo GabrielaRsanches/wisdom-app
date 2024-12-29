@@ -17,6 +17,6 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": ["src/**/*", "src/index.ts","src/main.tsn.ts", "src/main.ts", "index.ts"],
+  "include": ["src/**/*", "src/index.ts","src/main.tsn.ts", "src/main.ts", "index.ts", "./src/infra/dataSource.ts"],
   "exclude": ["node_modules", "dist"],
 }
