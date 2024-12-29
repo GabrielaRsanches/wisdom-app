@@ -1,5 +1,6 @@
 import { Question } from '../question/Question';
 import { Grade } from '../../../../../shared/enum';
+import bcrypt from 'bcrypt';
 
 export class Student {
   private readonly studentId: number;
@@ -11,7 +12,19 @@ export class Student {
     public grade: Grade,
     public createdQuestions?: Question[],
   ) {
-    this.password = password;
+    this.setPassword(password);
+  }
+
+  async setPassword(password: string) {
+    this.password = await bcrypt.hash(password, 10);
+  }
+
+  async comparePassword(password: string): Promise<boolean> {
+    return bcrypt.compare(password, this.password);
+  }
+
+  async changePassword(newPassword: string) {
+    await this.setPassword(newPassword);
   }
 
   get getId() {
@@ -22,9 +35,6 @@ export class Student {
     return this.password;
   }
 
-  async changePassword(newPassword: string) {
-    this.password = newPassword;
-  }
   async changeUserName(userName: string) {
     this.userName = userName;
   }
