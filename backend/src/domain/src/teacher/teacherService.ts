@@ -1,59 +1,55 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Teacher } from './Teacher';
-import { TeachingArea } from '../../../../../shared/enum';
+import { Inject, Injectable } from '@nestjs/common';
+import { createHash } from 'crypto';
 import { CreateTeacherDto } from './dto/createTeacher';
+import { Repository } from 'typeorm';
+import { TeacherEntity } from '../../../infra/persistence/entities/TeacherEntity';
+import { Teacher } from './Teacher';
 
 @Injectable()
 export class TeacherService {
-  private teachers: Teacher[] = [
-    new Teacher(
-      'John Doe',
-      'john.doe@example.com',
-      'StrongPassword123',
-      [],
-      [TeachingArea.Mathematics],
-      100,
-      [],
-    ),
-    new Teacher(
-      'Jane Smith',
-      'jane.smith@example.com',
-      'AnotherStrongPassword123',
-      [],
-      [TeachingArea.Sciences],
-      200,
-      [],
-    ),
-  ];
+  constructor(
+    @Inject('TEACHER_REPOSITORY')
+    private teacherRepository: Repository<TeacherEntity>,
+  ) {}
 
-  async findByEmailAndPassword(
-    email: string,
-    password: string,
-  ): Promise<Teacher> {
-    const teacher = this.teachers.find(
-      (t) => t.email === email && t.getPassword() === password,
-    );
-    if (!teacher) {
-      throw new NotFoundException('Invalid credentials');
-    }
-    return teacher;
-  }
-
-  async findByEmail(email: string): Promise<Teacher | undefined> {
-    return this.teachers.find((t) => t.email === email);
-  }
-
-  async create(createTeacherDto: CreateTeacherDto): Promise<Teacher> {
-    const newTeacher = new Teacher(
+  async create(createTeacherDto: CreateTeacherDto): Promise<TeacherEntity> {
+    const teacherDomain = new Teacher(
       createTeacherDto.name,
       createTeacherDto.email,
       createTeacherDto.password,
       createTeacherDto.credentials,
-      createTeacherDto.teachingArea,
+      createTeacherDto.teachingAreas,
       createTeacherDto.score || 0,
-      createTeacherDto.answeredQuestions || [],
     );
-    this.teachers.push(newTeacher);
-    return newTeacher;
+    const newTeacher = this.teacherRepository.create({
+      name: teacherDomain.name,
+      email: teacherDomain.email,
+      password: teacherDomain.getPassword(),
+      credentials: teacherDomain.credentials,
+      teachingAreas: teacherDomain.teachingAreas,
+      score: teacherDomain.score || 0,
+    });
+
+    return this.teacherRepository.save(newTeacher);
+  }
+
+  async findByEmail(email: string): Promise<TeacherEntity | undefined> {
+    return this.teacherRepository.findOne({ where: { email } });
+  }
+
+  async findByEmailAndPassword(
+  email: string,
+  password: string,
+): Promise<TeacherEntity | null> {
+  const teacher = await this.findByEmail(email);
+
+  if (teacher && password === teacher.password) {
+    return teacher;
+  }
+
+  return null;
+}
+  async findAll(): Promise<TeacherEntity[]> {
+    return this.teacherRepository.find();
   }
 }

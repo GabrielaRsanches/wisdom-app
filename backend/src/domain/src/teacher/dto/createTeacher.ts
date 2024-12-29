@@ -18,7 +18,7 @@ export class CreateTeacherDto {
 
   credentials: Credential[];
 
-  teachingArea: TeachingArea[];
+  teachingAreas: TeachingArea[];
 
   @IsNumber()
   score?: number = 0;
