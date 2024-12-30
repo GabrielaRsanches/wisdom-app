@@ -20,3 +20,5 @@ Frontend:
 Backend:
 - NestJs ^10.0.0
 - Jest ^29.5.0
+- TypeORM ^0.3.20
+- PostgreSQL 14
