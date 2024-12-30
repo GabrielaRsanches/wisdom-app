@@ -13,12 +13,12 @@ import {
   CheckboxGroup,
   useToast
 } from '@chakra-ui/react';
-import onFileSelected, { ConfirmedPassword } from '../../../helpers/utils';
-import { PasswordField } from '../../../helpers/PasswordField';
+import onFileSelected, { ConfirmedPassword } from '../../../../helpers/utils';
+import { PasswordField } from '../../../../helpers/PasswordField';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { TeacherRegistry } from '../../../helpers/interfaces';
-import { TeachingArea } from '../../../helpers/enum'; 
+import { TeacherRegistry } from '../../../../helpers/interfaces';
+import { TeachingArea } from '../../../../helpers/enum'; 
 import * as S from './TeacherSignUp.styles';
 import { usePostCreateTeacher } from '../../../../hooks/usePostCreateTeacher';
 

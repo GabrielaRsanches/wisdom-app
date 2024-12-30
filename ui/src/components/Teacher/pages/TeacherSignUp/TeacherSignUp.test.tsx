@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { WrapperTestingLibrary } from '../../../helpers/WrapperTestingLibrary';
+import { WrapperTestingLibrary } from '../../../../helpers/WrapperTestingLibrary';
 import TeacherSignUp from './TeacherSignUp';
 import { usePostCreateTeacher } from '../../../../hooks/usePostCreateTeacher';
 

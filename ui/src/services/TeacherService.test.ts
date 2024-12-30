@@ -1,6 +1,6 @@
 import axiosInstance from '../config/axiosConfig';
 import { fetchTeacherSignUp, fetchTeacherDashboard, teacherLogin } from './TeacherService';
-import { TeacherLoginInterface } from 'ui/src/components/helpers/interfaces';
+import { TeacherLoginInterface } from 'ui/src/helpers/interfaces';
 
 jest.mock('../config/axiosConfig');
 

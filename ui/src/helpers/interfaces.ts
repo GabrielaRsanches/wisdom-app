@@ -1,7 +1,7 @@
 
 import { TeachingArea, Grade } from '@shared/enum'
 import { Credential, StudentInterface, TeacherInterface } from '@shared/interfaces';
-import { ConfirmedPassword } from '../helpers/utils';
+import { ConfirmedPassword } from './utils';
 
 interface TeacherRegistry {
   name: string;

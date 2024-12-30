@@ -9,10 +9,10 @@ import {
   Text,
   Link,
 } from '@chakra-ui/react';
-import { PasswordField } from '../../../helpers/PasswordField';
+import { PasswordField } from '../../../../helpers/PasswordField';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { StudentLoginInterface } from '../../../helpers/interfaces';
+import { StudentLoginInterface } from '../../../../helpers/interfaces';
 import * as S from './StudentLogin.styles';
 import { useStudentLogin } from '../../../../hooks/useStudentLogin';
 

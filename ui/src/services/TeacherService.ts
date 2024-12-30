@@ -1,5 +1,5 @@
 import axiosInstance from '../config/axiosConfig'
-import { TeacherLoginInterface, TeacherRegistry } from 'ui/src/components/helpers/interfaces';
+import { TeacherLoginInterface, TeacherRegistry } from 'ui/src/helpers/interfaces';
 
 export const fetchTeacherSignUp = async () => {
   const response = await axiosInstance.get('http://localhost:8081/teacher/sign-up');

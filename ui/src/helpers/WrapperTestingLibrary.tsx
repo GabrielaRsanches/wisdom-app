@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { getQueryClient } from '../../query-client/client';
+import { getQueryClient } from '../query-client/client';
 
 const queryClient = getQueryClient();
 

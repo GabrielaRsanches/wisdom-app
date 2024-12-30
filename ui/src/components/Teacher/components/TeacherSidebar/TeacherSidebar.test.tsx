@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { WrapperTestingLibrary } from '../../../helpers/WrapperTestingLibrary';
+import { WrapperTestingLibrary } from '../../../../helpers/WrapperTestingLibrary';
 import TeacherSidebar from './TeacherSidebar';
 import { ChakraProvider } from '@chakra-ui/react';
 
