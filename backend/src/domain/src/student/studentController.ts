@@ -1,38 +1,31 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  BadRequestException,
-} from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { StudentService } from './studentService';
 import { CreateStudentDto } from './dto/createStudent';
-import { StudentLoginDto } from './dto/loginStudent';
-import { Student } from './student';
 
 @Controller('student')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  @Post('register')
-  async create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
-    const existingStudent = this.studentService.findById(
-      createStudentDto.studentId,
-    );
-    if (existingStudent) {
-      throw new BadRequestException('Account already exists');
-    }
+  @Get('sign-up')
+  getSignUp() {
+    return { message: 'Student Sign Up Endpoint' };
+  }
+
+  @Post('sign-up')
+  async createStudent(@Body() createStudentDto: CreateStudentDto) {
     return this.studentService.create(createStudentDto);
   }
 
   @Post('login')
-  async login(@Body() loginStudentDto: StudentLoginDto): Promise<Student> {
-    const student = this.studentService.login(loginStudentDto);
+  async login(@Body() body: { email: string; password: string }) {
+    const { email, password } = body;
+    const student = await this.studentService.findByEmailAndPassword(
+      email,
+      password,
+    );
+    if (!student) {
+      throw new Error('Invalid credentials');
+    }
     return student;
-  }
-
-  @Get()
-  async findAll(): Promise<Student[]> {
-    return this.studentService.findAll();
   }
 }
