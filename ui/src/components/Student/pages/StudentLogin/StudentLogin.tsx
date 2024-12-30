@@ -31,7 +31,7 @@ const StudentLogin = () => {
       setLoginError('');
 
       localStorage.setItem('loggedIn', 'true');
-      localStorage.setItem('teacherInfo', JSON.stringify(data.teacher));
+      localStorage.setItem('studentInfo', JSON.stringify(data.student));
       
       window.location.href = '/student/dashboard';
     },

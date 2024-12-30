@@ -13,10 +13,10 @@ interface TeacherRegistry {
 }
 
 interface StudentRegistry {
-  name: string;
+  userName: string;
   email: string;
   password: string;
-  confirmPassword: ConfirmedPassword;
+  confirmPassword: string;
   grade: Grade;
 }
 
