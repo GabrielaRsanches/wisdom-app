@@ -26,6 +26,11 @@ export interface TeacherLoginInterface {
   password: string;
 }
 
+export interface StudentLoginInterface {
+  email: string;
+  password: string;
+}
+
 interface Question {
   madeBy: StudentInterface;
   title: string;
