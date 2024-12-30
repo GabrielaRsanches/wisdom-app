@@ -15,6 +15,14 @@ const SignUpAs = () => {
    
   };
 
+  const handleIamATeacher = () => {
+    window.location.assign('/teacher/sign-up')
+  }
+
+  const handleIamAStudent = () => {
+     window.location.href = '/student/sign-up';
+  }
+
   return (
     <S.Box  >
       <Container as={SimpleGrid} maxW={'2xl'}>
@@ -41,8 +49,8 @@ First tell me, are you a teacher or student ?
                 bgGradient: 'linear(to-r, red.400,pink.400)',
                 boxShadow: 'xl',
               }} 
-              type="submit" 
-              onClick={() => {}}>
+              type="button" 
+              onClick={handleIamATeacher}>
               I am a teacher
             </S.ButtonComponent>
             <S.ButtonComponent bgGradient="linear(to-r, red.400,pink.400)"
@@ -52,19 +60,22 @@ First tell me, are you a teacher or student ?
                 bgGradient: 'linear(to-r, red.400,pink.400)',
                 boxShadow: 'xl',
               }} 
-              type="submit" 
-              onClick={() => {}}>
+              type="button" 
+              onClick={handleIamAStudent}>
               I am a student
             </S.ButtonComponent>
           </S.ButtonContainer>
 
             <S.AlreadyHaveAnAccountContainer>
-              
+              Already have an account? 
             <Link variant="underline"
-            href=""
-            color="linear(to-r, red.400,pink.400)"
-            >Already have an account? Login here</Link>
-
+            href="/teacher/login"
+            color="pink.400"
+            >Login as teacher</Link>
+            <Link variant="underline"
+            href="/student/login"
+            color="pink.400"
+            >Login as student</Link>
             </S.AlreadyHaveAnAccountContainer>
           </S.SignUpAsFormContainer>
         </Box>

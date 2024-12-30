@@ -62,5 +62,8 @@ export const ButtonComponent = styled(Button)`
 `;
 
 export const AlreadyHaveAnAccountContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin-top: 2rem;
 `;

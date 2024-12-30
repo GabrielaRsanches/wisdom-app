@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { createHash } from 'crypto';
 import { CreateTeacherDto } from './dto/createTeacher';
 import { Repository } from 'typeorm';
 import { TeacherEntity } from '../../../infra/persistence/entities/TeacherEntity';
@@ -38,17 +37,17 @@ export class TeacherService {
   }
 
   async findByEmailAndPassword(
-  email: string,
-  password: string,
-): Promise<TeacherEntity | null> {
-  const teacher = await this.findByEmail(email);
+    email: string,
+    password: string,
+  ): Promise<TeacherEntity | null> {
+    const teacher = await this.findByEmail(email);
 
-  if (teacher && password === teacher.password) {
-    return teacher;
+    if (teacher && password === teacher.password) {
+      return teacher;
+    }
+
+    return null;
   }
-
-  return null;
-}
   async findAll(): Promise<TeacherEntity[]> {
     return this.teacherRepository.find();
   }
