@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { WrapperTestingLibrary } from '../helpers/WrapperTestingLibrary';
 import { ChakraProvider } from '@chakra-ui/react';
 import SignUpAs from './SignUpAs';
@@ -15,6 +15,28 @@ const renderComponent = () =>
   );
 
 describe('SignUpAs Component', () => {
+  let originalLocation: Location;
+
+    beforeAll(() => {
+    originalLocation = window.location;
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: {
+        ...originalLocation,
+        href: '',
+        assign: jest.fn(),
+      },
+    });
+
+  });
+
+  afterAll(() => {
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: originalLocation,
+    });
+  });
+
   it('should render the welcome title and description correctly', () => {
     renderComponent();
 
@@ -31,9 +53,36 @@ describe('SignUpAs Component', () => {
     expect(screen.getByText(/I am a student/i)).toBeInTheDocument();
   });
 
-  it('should render the link to login page', () => {
+  it('should redirect to the teacher sign-up page when clicking "I am a teacher"', () => {
     renderComponent();
 
-    expect(screen.getByText(/Already have an account\? Login here/i)).toBeInTheDocument();
+    const teacherButton = screen.getByText(/I am a teacher/i);
+
+    fireEvent.click(teacherButton);
+
+    expect(window.location.assign).toHaveBeenCalledWith('/teacher/sign-up');
+  });
+
+   it('should redirect to the student sign-up page when clicking "I am a student"', () => {
+    renderComponent();
+
+    const studentButton = screen.getByText(/I am a student/i);
+
+    fireEvent.click(studentButton);
+
+    expect(window.location.assign).toHaveBeenCalledWith('/student/sign-up');
+  });
+
+  it('should render and redirect login links correctly', () => {
+    renderComponent();
+
+    const teacherLoginLink = screen.getByText(/Login as teacher/i);
+    const studentLoginLink = screen.getByText(/Login as student/i);
+
+    expect(teacherLoginLink).toBeInTheDocument();
+    expect(teacherLoginLink.getAttribute('href')).toBe('/teacher/login');
+
+    expect(studentLoginLink).toBeInTheDocument();
+    expect(studentLoginLink.getAttribute('href')).toBe('/student/login');
   });
 });

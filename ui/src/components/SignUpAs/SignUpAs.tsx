@@ -11,16 +11,12 @@ import * as S from './SignUpAs.styles'
 
 const SignUpAs = () => {
 
-  const AlreadyHaveAnAccount = async () => {
-   
-  };
-
   const handleIamATeacher = () => {
     window.location.assign('/teacher/sign-up')
   }
 
   const handleIamAStudent = () => {
-     window.location.href = '/student/sign-up';
+     window.location.assign('/student/sign-up');
   }
 
   return (
