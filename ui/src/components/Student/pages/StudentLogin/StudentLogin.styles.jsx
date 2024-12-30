@@ -13,9 +13,9 @@ const breakpoints = {
 export const LoginTitleContainer = styled.div`
   display: inline-flex;
   justify-content: center;
+  align-items: center;
   height: 100%;
   padding-top: 30%;
-
   @media (max-width: ${breakpoints.tablet}) {
     font-size: 2xl;
   }
