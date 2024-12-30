@@ -1,77 +1,51 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Student } from './student';
-import { CreateStudentDto } from './dto/createStudent';
-import { StudentLoginDto } from './dto/loginStudent';
+import { Inject, Injectable } from '@nestjs/common';
+import { CreateStudentDto } from './dto';
+import { Repository } from 'typeorm';
+import { StudentEntity } from '../../../infra/persistence/entities/StudentEntity';
+import { Student } from './Student';
 
 @Injectable()
 export class StudentService {
-  private readonly students: Student[] = [];
+  constructor(
+    @Inject('STUDENT_REPOSITORY')
+    private studentRepository: Repository<StudentEntity>,
+  ) {}
 
-  create(createStudentDto: CreateStudentDto): Student {
-    const student = new Student(
+  async create(createStudentDto: CreateStudentDto): Promise<StudentEntity> {
+    const studentDomain = new Student(
       createStudentDto.userName,
+      createStudentDto.email,
       createStudentDto.password,
       createStudentDto.grade,
     );
-    this.students.push(student);
-    return student;
+    const newStudent = this.studentRepository.create({
+      studentId: studentDomain.getId,
+      userName: studentDomain.userName,
+      email: studentDomain.email,
+      password: studentDomain.getPassword,
+      grade: studentDomain.grade,
+    });
+
+    return this.studentRepository.save(newStudent);
   }
 
-  findAll(): Student[] {
-    return this.students;
+  async findByEmail(email: string): Promise<StudentEntity | undefined> {
+    return this.studentRepository.findOne({ where: { email } });
   }
 
-  findById(studentId: number): Student {
-    return this.students.find((student) => student.getId === studentId);
-  }
+  async findByEmailAndPassword(
+    email: string,
+    password: string,
+  ): Promise<StudentEntity | null> {
+    const student = await this.findByEmail(email);
 
-  findByUserNameAndPassword(userName: string, password: string): Student {
-    return this.students.find(
-      (student) =>
-        student.userName === userName && student.getPassword === password,
-    );
-  }
-
-  login(loginStudentDto: StudentLoginDto): Student {
-    const student = this.findByUserNameAndPassword(
-      loginStudentDto.userName,
-      loginStudentDto.password,
-    );
-    if (!student) {
-      throw new NotFoundException('Invalid username or password');
+    if (student && password === student.password) {
+      return student;
     }
-    return student;
-  }
 
-  updatePassword(studentId: number, newPassword: string): Student {
-    const studentIndex = this.students.findIndex(
-      (student) => student.getId === studentId,
-    );
-    if (studentIndex === -1) {
-      throw new NotFoundException('Student not found');
-    }
-    this.students[studentIndex].changePassword(newPassword);
-    return this.students[studentIndex];
+    return null;
   }
-
-  updateUserName(studentId: number, newUserName: string): Student {
-    const studentIndex = this.students.findIndex(
-      (student) => student.getId === studentId,
-    );
-    if (studentIndex === -1) {
-      throw new NotFoundException('Student not found');
-    }
-    this.students[studentIndex].changeUserName(newUserName);
-    return this.students[studentIndex];
-  }
-
-  deleteAccount(studentId: number): void {
-    const studentIndex = this.students.findIndex(
-      (student) => student.getId === studentId,
-    );
-    if (studentIndex === -1) {
-      throw new NotFoundException('Student not found');
-    }
-    this.students.splice(studentIndex, 1);
+  async findAll(): Promise<StudentEntity[]> {
+    return this.studentRepository.find();
   }
 }

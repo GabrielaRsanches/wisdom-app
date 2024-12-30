@@ -10,6 +10,9 @@ export class StudentEntity {
   @Column({ type: 'varchar', length: 100 })
   userName: string;
 
+  @Column()
+  email: string;
+
   @Column({ type: 'varchar', length: 255 })
   password: string;
 

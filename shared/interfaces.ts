@@ -18,6 +18,7 @@ export interface TeacherInterface {
 
 export interface StudentInterface {
   studentId: number;
+  email: string;
   userName: string;
   password: string;
   grade: Grade;

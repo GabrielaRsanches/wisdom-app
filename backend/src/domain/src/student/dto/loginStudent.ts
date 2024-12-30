@@ -1,11 +1,11 @@
-import { IsString } from 'class-validator';
+import { IsEmail, IsString } from 'class-validator';
 
 export class StudentLoginDto {
   @IsString()
   studentId: number;
 
-  @IsString()
-  userName: string;
+  @IsEmail()
+  email: string;
 
   password: string;
 }

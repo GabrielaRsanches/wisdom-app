@@ -8,11 +8,12 @@ export class Student {
 
   constructor(
     public userName: string,
+    public email: string,
     password: string,
     public grade: Grade,
     public createdQuestions?: Question[],
   ) {
-    this.setPassword(password);
+    this.password = password;
   }
 
   async setPassword(password: string) {
