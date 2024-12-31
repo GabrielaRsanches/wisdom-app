@@ -32,10 +32,10 @@ export interface StudentLoginInterface {
 }
 
 interface Question {
-  madeBy: StudentInterface;
+  madeBy: number;
   title: string;
   description: string;
-  answer?: Answer[];
+  answers?: Answer[];
   answeredBy?: TeacherInterface
 }
 
