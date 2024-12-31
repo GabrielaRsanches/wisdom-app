@@ -5,6 +5,7 @@ import TeacherSignUp from './components/Teacher/pages/TeacherSignUp/TeacherSignU
 import TeacherLogin from './components/Teacher/pages/TeacherLogin/TeacherLogin';
 import SignUpAs from './components/SignUpAs/SignUpAs';
 import StudentLogin from './components/Student/pages/StudentLogin/StudentLogin';
+import CreateQuestion from './components/Student/pages/CreateQuestion/CreateQuestion';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/teacher/login" element={<TeacherLogin />} />
         <Route path="/sign-up" element={<SignUpAs />} />
         <Route path="/student/login" element={<StudentLogin />} />
+        <Route path="/student/question" element={<CreateQuestion />} />
       </Routes>
     </Router>
   );

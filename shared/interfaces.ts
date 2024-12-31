@@ -30,10 +30,10 @@ export interface QuestionInterface {
   subject: Subject[];
   title: string;
   description: string;
-  madeBy: Student;
+  madeBy: number;
   createdAt: Date;
-  answers: Answer[];
-  answeredBy?: Teacher;
+  answers?: Answer[];
+  answeredBy?: number;
 }
 
 export interface Credential {

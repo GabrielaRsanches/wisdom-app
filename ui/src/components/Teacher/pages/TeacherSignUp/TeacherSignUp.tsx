@@ -151,8 +151,8 @@ const TeacherSignUp = () => {
                   <S.TeachingAreaOptionsContainer>
                     <CheckboxGroup
                       colorScheme="pink"
-                      value={selectedTeachingArea} // Bind value to selectedTeachingArea
-                      onChange={handleTeachingAreaChange} // Update state when checkboxes are selected
+                      value={selectedTeachingArea}
+                      onChange={handleTeachingAreaChange}
                     >
                       {teachingAreas.map((area) => (
                         <Checkbox key={area} value={area}>

@@ -1,18 +1,18 @@
-import { IsString, IsArray, IsNumber } from 'class-validator';
+import { IsString, IsEnum, IsNotEmpty } from 'class-validator';
 import { Subject } from '../../../../../../shared/enum';
-import { Answer } from '../../answer/Answer';
 export class CreateQuestionDto {
-  @IsNumber()
-  questionId: number;
-
+  @IsNotEmpty()
   @IsString()
   title: string;
 
+  @IsNotEmpty()
   @IsString()
   description: string;
 
-  @IsArray()
-  subject: Subject;
+  @IsNotEmpty()
+  madeBy: number; // Student ID
 
-  answers: Answer[] = [];
+  @IsNotEmpty()
+  @IsEnum(Subject)
+  subject: Subject;
 }

@@ -1,10 +1,23 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Inject,
+  forwardRef,
+} from '@nestjs/common';
 import { StudentService } from './studentService';
 import { CreateStudentDto } from './dto/createStudent';
+import { QuestionService } from '../question/questionService';
+import { CreateQuestionDto } from '../question/dto/createQuestion';
 
 @Controller('student')
 export class StudentController {
-  constructor(private readonly studentService: StudentService) {}
+  constructor(
+    private readonly studentService: StudentService,
+    @Inject(forwardRef(() => QuestionService))
+    private readonly questionService: QuestionService,
+  ) {}
 
   @Get('sign-up')
   getSignUp() {
@@ -27,5 +40,10 @@ export class StudentController {
       throw new Error('Invalid credentials');
     }
     return student;
+  }
+
+  @Post('question')
+  async createQuestion(@Body() createQuestionDto: CreateQuestionDto) {
+    return this.questionService.createQuestion(createQuestionDto);
   }
 }

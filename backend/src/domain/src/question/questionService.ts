@@ -1,41 +1,38 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Question } from './question';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { QuestionEntity } from '../../../infra/persistence/entities/QuestionEntity';
+import { StudentEntity } from '../../../infra/persistence/entities/StudentEntity';
 import { CreateQuestionDto } from './dto/createQuestion';
-import { Student } from '../student/Student';
 
 @Injectable()
 export class QuestionService {
-  private readonly questions: Question[] = [];
+  constructor(
+    @Inject('QUESTION_REPOSITORY')
+    private readonly questionRepository: Repository<QuestionEntity>,
+    @Inject('STUDENT_REPOSITORY')
+    private readonly studentRepository: Repository<StudentEntity>,
+  ) {}
 
-  create(createQuestionDto: CreateQuestionDto, madeBy: Student): Question {
-    const question = new Question(
-      createQuestionDto.title,
-      createQuestionDto.description,
-      madeBy,
-      createQuestionDto.subject,
-      createQuestionDto.answers,
-    );
-    this.questions.push(question);
-    return question;
-  }
+  async createQuestion(
+    createQuestionDto: CreateQuestionDto,
+  ): Promise<QuestionEntity> {
+    const { madeBy, title, description, subject } = createQuestionDto;
 
-  findAll(): Question[] {
-    return this.questions;
-  }
-
-  findById(questionId: number): Question {
-    return this.questions.find(
-      (question) => question.getQuestionId === questionId,
-    );
-  }
-
-  delete(questionId: number): void {
-    const index = this.questions.findIndex(
-      (question) => question.getQuestionId === questionId,
-    );
-    if (index === -1) {
-      throw new NotFoundException('Question not found');
+    const student = await this.studentRepository.findOne({
+      where: { studentId: madeBy },
+    });
+    if (!student) {
+      throw new NotFoundException(`Student with ID ${madeBy} not found`);
     }
-    this.questions.splice(index, 1);
+
+    const question = this.questionRepository.create({
+      title,
+      description,
+      subject,
+      madeBy: student,
+      createdAt: new Date(),
+    });
+
+    return this.questionRepository.save(question);
   }
 }
