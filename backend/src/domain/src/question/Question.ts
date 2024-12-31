@@ -19,13 +19,11 @@ export class Question {
     description: string,
     madeBy: Student,
     subject: Subject,
-    answers: Answer[],
   ) {
     this.title = title;
     this.description = description;
     this.madeBy = madeBy;
     this.createdAt = new Date();
-    this.answers = answers;
     this.subject = subject;
   }
 
