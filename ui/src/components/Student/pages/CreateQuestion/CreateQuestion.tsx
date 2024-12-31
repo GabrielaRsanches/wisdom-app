@@ -114,7 +114,7 @@ const CreateQuestion = () => {
               </FormControl>
 
               <FormControl>
-                  <FormLabel>Subjects</FormLabel>
+                  <FormLabel>Subject</FormLabel>
                   <S.SubjectOptionsContainer>
                    <Stack>
                       {subjects.map((subject) => (

@@ -40,7 +40,7 @@ export const SubjectOptionsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  max-height: 200px;
+  heigh: 100px;
   width: 100%;
 
   @media (max-width: ${breakpoints.mobile}) {
