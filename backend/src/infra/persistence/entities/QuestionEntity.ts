@@ -41,7 +41,9 @@ export class QuestionEntity {
   })
   answers: AnswerEntity[];
 
-  @ManyToOne(() => TeacherEntity, (teacher) => teacher.answeredQuestions)
+  @ManyToOne(() => TeacherEntity, (teacher) => teacher.answers, {
+    nullable: true,
+  })
   @JoinColumn({ name: 'answeredBy' })
   answeredBy: TeacherEntity;
 }

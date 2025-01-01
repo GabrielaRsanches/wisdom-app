@@ -13,7 +13,7 @@ export interface TeacherInterface {
   credentials: Credential[];
   teachingAreas: TeachingArea[];
   score: number;
-  answeredQuestions?: Question[];
+  answers?: Answer[];
 }
 
 export interface StudentInterface {

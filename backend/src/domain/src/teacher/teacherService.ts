@@ -32,8 +32,12 @@ export class TeacherService {
     return this.teacherRepository.save(newTeacher);
   }
 
-  async findByEmail(email: string): Promise<TeacherEntity | undefined> {
+  async findByEmail(email: string): Promise<TeacherEntity | null> {
     return this.teacherRepository.findOne({ where: { email } });
+  }
+
+  async findById(teacherId: number): Promise<TeacherEntity | null> {
+    return this.teacherRepository.findOne({ where: { teacherId } });
   }
 
   async findByEmailAndPassword(
