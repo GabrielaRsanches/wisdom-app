@@ -40,8 +40,10 @@ interface Question {
 }
 
 interface Answer {
-  question: Question;
-  text: string
+  answerId: number;
+  description: string;
+  answeringTo: number; //questionId
+  answeredBy: number; //teacherId
 }
 
 export type { TeacherRegistry, StudentRegistry, Question, Answer };

@@ -36,6 +36,13 @@ export interface QuestionInterface {
   answeredBy?: number;
 }
 
+export interface AnswerInterface {
+  answerId: number;
+  description: string;
+  answeringTo: number; //questionId
+  answeredBy: number; //teacherId
+}
+
 export interface Credential {
   id: string;
   name: string;
