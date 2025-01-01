@@ -9,6 +9,6 @@ import { StudentModule } from '../student/studentModule';
   imports: [Question, DatabaseModule, forwardRef(() => StudentModule)],
   controllers: [],
   providers: [...questionsProviders, QuestionService],
-  exports: [QuestionService],
+  exports: [...questionsProviders, QuestionService],
 })
 export class QuestionModule {}

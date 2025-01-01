@@ -1,4 +1,5 @@
 import {
+  AfterLoad,
   Column,
   Entity,
   Index,
@@ -39,9 +40,20 @@ export class QuestionEntity {
   @OneToMany(() => AnswerEntity, (answer) => answer.answeringTo, {
     cascade: true,
   })
-  answers: AnswerEntity[];
+  answersRelations: AnswerEntity[];
 
-  @ManyToOne(() => TeacherEntity, (teacher) => teacher.answeredQuestions)
+  @ManyToOne(() => TeacherEntity, (teacher) => teacher.answers, {
+    nullable: true,
+  })
   @JoinColumn({ name: 'answeredBy' })
   answeredBy: TeacherEntity;
+
+  @Column({ type: 'jsonb', nullable: true })
+  answers: string[];
+
+  @AfterLoad()
+  async populateAnswers() {
+    this.answers =
+      this.answersRelations?.map((answer) => answer.description) || [];
+  }
 }
