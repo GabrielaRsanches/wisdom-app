@@ -20,10 +20,11 @@ export class AnswerService {
     createAnswerDto: CreateAnswerDto,
     teacherId: number,
   ): Promise<AnswerEntity> {
-    const { text, answeringTo } = createAnswerDto;
+    const { description, answeringTo } = createAnswerDto;
 
     const question = await this.questionRepository.findOne({
       where: { questionId: answeringTo },
+      relations: ['answersRelations'],
     });
     if (!question) {
       throw new Error('Question not found');
@@ -40,7 +41,7 @@ export class AnswerService {
     await this.questionRepository.save(question);
 
     const answer = this.answerRepository.create({
-      description: text,
+      description: description,
       answeringTo: question,
       answeredBy: teacher,
     });

@@ -2,7 +2,7 @@ import { IsString } from 'class-validator';
 
 export class CreateAnswerDto {
   @IsString()
-  text: string;
+  description: string;
 
   answeringTo: number; //questionId
   answeredBy: number; //teacherId
