@@ -6,6 +6,7 @@ import TeacherLogin from './components/Teacher/pages/TeacherLogin/TeacherLogin';
 import SignUpAs from './components/SignUpAs/SignUpAs';
 import StudentLogin from './components/Student/pages/StudentLogin/StudentLogin';
 import CreateQuestion from './components/Student/pages/CreateQuestion/CreateQuestion';
+import StudentAccount from './components/Student/pages/StudentAccount/StudentAccount';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/sign-up" element={<SignUpAs />} />
         <Route path="/student/login" element={<StudentLogin />} />
         <Route path="/student/question" element={<CreateQuestion />} />
+        <Route path="/student/account" element={<StudentAccount />} />
       </Routes>
     </Router>
   );
