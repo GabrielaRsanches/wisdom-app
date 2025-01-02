@@ -13,7 +13,7 @@ export interface TeacherInterface {
   credentials: Credential[];
   teachingAreas: TeachingArea[];
   score: number;
-  answeredQuestions?: Question[];
+  answers?: Answer[];
 }
 
 export interface StudentInterface {
@@ -30,10 +30,17 @@ export interface QuestionInterface {
   subject: Subject[];
   title: string;
   description: string;
-  madeBy: Student;
+  madeBy: number;
   createdAt: Date;
-  answers: Answer[];
-  answeredBy?: Teacher;
+  answers?: Answer[];
+  answeredBy?: number;
+}
+
+export interface AnswerInterface {
+  answerId: number;
+  description: string;
+  answeringTo: number; //questionId
+  answeredBy: number; //teacherId
 }
 
 export interface Credential {

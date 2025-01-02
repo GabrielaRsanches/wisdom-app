@@ -3,14 +3,23 @@ import {
   Get,
   Post,
   Body,
+  Inject,
+  forwardRef,
   // NotFoundException,
 } from '@nestjs/common';
 import { CreateTeacherDto } from './dto';
 import { TeacherLoginDto } from './dto/loginTeacher';
 import { TeacherService } from './teacherService';
+import { CreateAnswerDto } from '../answer/dto/createAnswer';
+import { AnswerService } from '../answer/answerService';
+
 @Controller('teacher')
 export class TeacherController {
-  constructor(private readonly teacherService: TeacherService) {}
+  constructor(
+    private readonly teacherService: TeacherService,
+    @Inject(forwardRef(() => AnswerService))
+    private readonly answerService: AnswerService,
+  ) {}
 
   @Get('sign-up')
   getSignUp() {
@@ -38,9 +47,11 @@ export class TeacherController {
   async createTeacher(@Body() createTeacherDto: CreateTeacherDto) {
     return this.teacherService.create(createTeacherDto);
   }
-
-  // @Get()
-  // async findAll(): Promise<Teacher[]> {
-  //   return this.teacherService.findAll();
-  // }
+  @Post('answer')
+  async createAnswer(@Body() createAnswerDto: CreateAnswerDto) {
+    return this.answerService.createAnswer(
+      createAnswerDto,
+      createAnswerDto.answeredBy,
+    );
+  }
 }

@@ -1,7 +1,7 @@
-import { Question } from '../question/Question';
 import { TeachingArea } from '../../../../../shared/enum';
 import { TeacherInterface, Credential } from '../../../../../shared/interfaces';
 import bcrypt from 'bcrypt';
+import { Answer } from '../answer/Answer';
 
 export class Teacher implements TeacherInterface {
   private readonly teacherId: number;
@@ -14,7 +14,7 @@ export class Teacher implements TeacherInterface {
     public credentials: Credential[],
     public teachingAreas: TeachingArea[],
     public score: number = 0,
-    public answeredQuestions: Question[] = [],
+    public answers: Answer[] = [],
   ) {
     this.password = password;
   }

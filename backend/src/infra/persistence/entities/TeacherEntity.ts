@@ -5,8 +5,8 @@ import {
   OneToMany,
   Index,
 } from 'typeorm';
-import { QuestionEntity } from './QuestionEntity';
 import { TeachingArea } from '../../../../../shared/enum';
+import { AnswerEntity } from './AnswerEntity';
 
 @Entity('teachers')
 @Index('idx_teacher_email', ['email'], { unique: true })
@@ -33,6 +33,6 @@ export class TeacherEntity {
   @Column({ default: 0 })
   score: number;
 
-  @OneToMany(() => QuestionEntity, (question) => question.answeredBy)
-  answeredQuestions: QuestionEntity[];
+  @OneToMany(() => AnswerEntity, (answer) => answer.answeredBy)
+  answers: AnswerEntity[];
 }

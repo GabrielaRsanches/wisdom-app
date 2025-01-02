@@ -9,6 +9,7 @@ import SignUpAs from './components/SignUpAs/SignUpAs';
 
 import StudentLogin from './components/Student/pages/StudentLogin/StudentLogin';
 import StudentSignUp from './components/Student/pages/StudentSignUp/StudentSignUp';
+import CreateQuestion from './components/Student/pages/CreateQuestion/CreateQuestion';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/sign-up" element={<SignUpAs />} />
         <Route path="/student/login" element={<StudentLogin />} />
         <Route path="/student/sign-up" element={<StudentSignUp />} />
+        <Route path="/student/question" element={<CreateQuestion />} />
       </Routes>
     </Router>
   );

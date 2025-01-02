@@ -1,7 +1,7 @@
 import { IsEmail, IsNumber, IsString, IsStrongPassword } from 'class-validator';
-import { Question } from '../../question/Question';
 import { TeachingArea } from '../../../../../../shared/enum';
 import { Credential } from '../../../../../../shared/interfaces';
+import { Answer } from '../../answer/Answer';
 
 export class CreateTeacherDto {
   @IsString()
@@ -23,5 +23,5 @@ export class CreateTeacherDto {
   @IsNumber()
   score?: number = 0;
 
-  answeredQuestions?: Question[] = [];
+  answers: Answer[] = [];
 }

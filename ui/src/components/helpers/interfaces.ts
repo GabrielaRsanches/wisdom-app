@@ -32,16 +32,18 @@ export interface StudentLoginInterface {
 }
 
 interface Question {
-  madeBy: StudentInterface;
+  madeBy: number;
   title: string;
   description: string;
-  answer?: Answer[];
+  answers?: Answer[];
   answeredBy?: TeacherInterface
 }
 
 interface Answer {
-  question: Question;
-  text: string
+  answerId: number;
+  description: string;
+  answeringTo: number; //questionId
+  answeredBy: number; //teacherId
 }
 
 export type { TeacherRegistry, StudentRegistry, Question, Answer };

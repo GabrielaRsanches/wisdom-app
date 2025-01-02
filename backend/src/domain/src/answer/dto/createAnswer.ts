@@ -1,12 +1,9 @@
-import { IsString, IsUUID } from 'class-validator';
-import { Question } from '../../question/Question';
+import { IsString } from 'class-validator';
+
 export class CreateAnswerDto {
-  @IsUUID()
-  answerId: number;
-
   @IsString()
-  text: string;
+  description: string;
 
-  @IsUUID()
-  answeringTo: Question;
+  answeringTo: number; //questionId
+  answeredBy: number; //teacherId
 }
