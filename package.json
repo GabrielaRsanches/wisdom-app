@@ -9,20 +9,21 @@
   },
   "dependencies": {
     "jest": "^29.7.0",
-    "nestjs": "^0.0.1"
+    "nestjs": "^0.0.1",
+    "nvm": "^0.0.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
     "@vercel/style-guide": "^5.0.1",
+    "class-validator": "^0.14.1",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
     "eslint-config-prettier": "9.0.0",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.5.4",
-    "class-validator": "^0.14.1",
-    "@babel/core": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
-    "@babel/preset-react": "^7.26.3",
-    "@babel/preset-typescript": "^7.26.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.7.2"
   },

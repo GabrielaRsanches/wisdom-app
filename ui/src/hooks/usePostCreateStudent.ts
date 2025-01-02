@@ -3,7 +3,7 @@ import { Grade } from '@shared/enum';
 import { studentSignUp } from '../services/StudentService';
 
 /**
- * Custom hook for creating a teacher.
+ * Custom hook for creating a student.
  * @param {object} options - Options for the mutation (e.g., onSuccess, onError).
  */
 export const usePostCreateStudent = (options = {}) => {
