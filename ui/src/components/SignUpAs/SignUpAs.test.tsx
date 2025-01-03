@@ -60,7 +60,7 @@ describe('SignUpAs Component', () => {
 
     fireEvent.click(teacherButton);
 
-    expect(window.location.assign).toHaveBeenCalledWith('/teacher/sign-up');
+    expect(window.location.assign).toHaveBeenCalledWith('/teachers/sign-up');
   });
 
    it('should redirect to the student sign-up page when clicking "I am a student"', () => {
@@ -70,7 +70,7 @@ describe('SignUpAs Component', () => {
 
     fireEvent.click(studentButton);
 
-    expect(window.location.assign).toHaveBeenCalledWith('/student/sign-up');
+    expect(window.location.assign).toHaveBeenCalledWith('/students/sign-up');
   });
 
   it('should render and redirect login links correctly', () => {
@@ -80,9 +80,9 @@ describe('SignUpAs Component', () => {
     const studentLoginLink = screen.getByText(/Login as student/i);
 
     expect(teacherLoginLink).toBeInTheDocument();
-    expect(teacherLoginLink.getAttribute('href')).toBe('/teacher/login');
+    expect(teacherLoginLink.getAttribute('href')).toBe('/teachers/login');
 
     expect(studentLoginLink).toBeInTheDocument();
-    expect(studentLoginLink.getAttribute('href')).toBe('/student/login');
+    expect(studentLoginLink.getAttribute('href')).toBe('/students/login');
   });
 });

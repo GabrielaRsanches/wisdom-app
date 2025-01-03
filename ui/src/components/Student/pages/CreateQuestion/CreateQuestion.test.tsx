@@ -10,11 +10,18 @@ import '@testing-library/jest-dom';
 import { WrapperTestingLibrary } from '../../../helpers/WrapperTestingLibrary';
 import CreateQuestion from './CreateQuestion';
 import { useCreateQuestion } from '../../../../hooks/usePostCreateQuestion';
+import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom';
+import { AuthProvider } from '../../../AuthContext';
 
 // Mock the custom hook to control the behavior during tests
 jest.mock('../../../../hooks/usePostCreateQuestion', () => ({
   useCreateQuestion: jest.fn(),
   mutate: jest.fn(),
+}));
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn(),
 }));
 
 // Mock the Subject enum
@@ -28,11 +35,19 @@ jest.mock('../../../../../../shared/enum', () => ({
 
 const renderComponent = () =>
   render(
-    <WrapperTestingLibrary>
-      <ChakraProvider>
-        <CreateQuestion />
-      </ChakraProvider>
-    </WrapperTestingLibrary>
+    <MemoryRouter initialEntries={[`/students/1/questions`]}>
+      <Routes>
+        <Route path="/students/:studentId/questions" element={
+          <AuthProvider>
+            <WrapperTestingLibrary>
+              <ChakraProvider>
+                <CreateQuestion />
+              </ChakraProvider>
+            </WrapperTestingLibrary>
+          </AuthProvider>
+        } />
+      </Routes>
+    </MemoryRouter>
   );
 
 describe('CreateQuestion Component', () => {
@@ -41,6 +56,8 @@ describe('CreateQuestion Component', () => {
     (useCreateQuestion as jest.Mock).mockReturnValue({
       mutate: mockMutate,
     });
+
+    (useParams as jest.Mock).mockReturnValue({ studentId: '1' });
   });
 
   it('should render the question creation title', () => {
@@ -81,7 +98,7 @@ describe('CreateQuestion Component', () => {
     renderComponent();
 
     const submitButton = screen.getByRole('button', { name: /Submit/i });
-    fireEvent.click(submitButton);
+     fireEvent.click(submitButton);
 
      waitFor(() => {
       expect(screen.getByText(/This is required/i)).toBeInTheDocument();

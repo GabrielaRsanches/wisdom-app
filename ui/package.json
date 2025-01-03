@@ -45,6 +45,7 @@
     "react-pro-sidebar": "^1.1.0",
     "react-router-dom": "^7.1.1",
     "styled-components": "^5.3.11",
+    "util": "^0.12.5",
     "zod": "^3.24.1"
   },
   "devDependencies": {

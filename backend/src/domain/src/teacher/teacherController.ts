@@ -5,6 +5,7 @@ import {
   Body,
   Inject,
   forwardRef,
+  Param,
   // NotFoundException,
 } from '@nestjs/common';
 import { CreateTeacherDto } from './dto';
@@ -13,7 +14,7 @@ import { TeacherService } from './teacherService';
 import { CreateAnswerDto } from '../answer/dto/createAnswer';
 import { AnswerService } from '../answer/answerService';
 
-@Controller('teacher')
+@Controller('teachers')
 export class TeacherController {
   constructor(
     private readonly teacherService: TeacherService,
@@ -47,11 +48,17 @@ export class TeacherController {
   async createTeacher(@Body() createTeacherDto: CreateTeacherDto) {
     return this.teacherService.create(createTeacherDto);
   }
-  @Post('answer')
-  async createAnswer(@Body() createAnswerDto: CreateAnswerDto) {
+
+  @Post(':teacherId/questions/:questionId/answers')
+  async createAnswer(
+    @Param('teacherId') teacherId: number,
+    @Param('questionId') questionId: number,
+    @Body() createAnswerDto: CreateAnswerDto,
+  ) {
     return this.answerService.createAnswer(
       createAnswerDto,
-      createAnswerDto.answeredBy,
+      teacherId,
+      questionId,
     );
   }
 }

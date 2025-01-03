@@ -1,9 +1,6 @@
 import { Grade, Subject, TeachingArea } from './enum';
 import { Question } from '../backend/src/domain/src/question/Question';
-import { Student } from '../backend/src/domain/src/student/Student';
 import { Answer } from '../backend/src/domain/src/answer/Answer';
-import { Teacher } from '../backend/src/domain/src/teacher/Teacher';
-import { IsEmail } from 'class-validator';
 
 export interface TeacherInterface {
   getTeacherId(): number;

@@ -6,7 +6,7 @@ import { AnswerInterface } from '@shared/interfaces';
  * @param {Partial<AnswerInterface>} data - The question data to be created.
  * @returns {Promise<AnswerInterface>} - The created question response.
  */
-export const createAnswer = async (data: Partial<AnswerInterface>): Promise<AnswerInterface> => {
-  const response = await axiosInstance.post('/teacher/answer', data);
+export const createAnswer = async (data: Partial<AnswerInterface>, teacherId: number, questionId: number): Promise<AnswerInterface> => {
+  const response = await axiosInstance.post(`/teachers/${teacherId}/questions/${questionId}/answers`, data);
   return response.data;
 };

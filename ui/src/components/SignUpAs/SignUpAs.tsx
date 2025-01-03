@@ -12,11 +12,11 @@ import * as S from './SignUpAs.styles'
 const SignUpAs = () => {
 
   const handleIamATeacher = () => {
-    window.location.assign('/teacher/sign-up')
+    window.location.assign('/teachers/sign-up')
   }
 
   const handleIamAStudent = () => {
-     window.location.assign('/student/sign-up');
+     window.location.assign('/students/sign-up');
   }
 
   return (
@@ -65,11 +65,11 @@ First tell me, are you a teacher or student ?
             <S.AlreadyHaveAnAccountContainer>
               Already have an account? 
             <Link variant="underline"
-            href="/teacher/login"
+            href="/teachers/login"
             color="pink.400"
             >Login as teacher</Link>
             <Link variant="underline"
-            href="/student/login"
+            href="/students/login"
             color="pink.400"
             >Login as student</Link>
             </S.AlreadyHaveAnAccountContainer>

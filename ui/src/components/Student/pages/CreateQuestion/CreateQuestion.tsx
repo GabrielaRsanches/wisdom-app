@@ -17,8 +17,10 @@ import { useCreateQuestion } from '../../../../hooks/usePostCreateQuestion';
 import { QuestionInterface } from '../../../../../../shared/interfaces'; 
 import { Subject } from '../../../../../../shared/enum'; 
 import * as S from './CreateQuestion.styles';
+import { useParams } from 'react-router-dom';
 
 const CreateQuestion = () => {
+  const { studentId } = useParams<{ studentId: string }>();
   const [selectedSubject, setSelectedSubject] = useState<Subject | string>('');
   const subjects = Object.values(Subject);
   const toast = useToast();
@@ -33,7 +35,18 @@ const CreateQuestion = () => {
     formState: { isSubmitting, errors },
   } = useForm<QuestionInterface>();
 
-  const { mutate: createQuestion } = useCreateQuestion({
+  if (!studentId) {
+    toast({
+      title: 'Error.',
+      description: 'Student ID is required.',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    });
+    return null;
+  }
+
+  const { mutate: createQuestion } = useCreateQuestion(studentId, {
     onSuccess: () => {
       toast({
         title: 'Question posted.',
@@ -69,6 +82,7 @@ const CreateQuestion = () => {
     createQuestion({
       ...data,
       subject: selectedSubject,
+      studentId,
     });
   };
 

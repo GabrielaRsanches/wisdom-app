@@ -48,4 +48,8 @@ export class StudentService {
   async findAll(): Promise<StudentEntity[]> {
     return this.studentRepository.find();
   }
+
+  async findById(id: number): Promise<StudentEntity | undefined> {
+    return this.studentRepository.findOne({ where: { studentId: id } });
+  }
 }
