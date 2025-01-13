@@ -18,19 +18,20 @@ import {
   import React, { useState } from 'react';
   import { useForm } from 'react-hook-form';
   import {StudentRegistry } from '../../../helpers/interfaces';
-  import { StudentGrade } from '../../../helpers/enum'; 
+  import { Grade } from '@shared/enum';
+  
   import * as S from './StudentSignUp.styles';
   import { usePostCreateStudent } from '../../../../hooks/usePostCreateStudent';
   
   const StudentSignUp = () => {
    
-    const [selectedStudentGrade, setSelectedStudentGrade] = useState<StudentGrade[]>([]);
-    const StudentGrades = Object.values(StudentGrade);
+    const [selectedStudentGrade, setSelectedStudentGrade] = useState<Grade[]>([]);
+    const StudentGrades = Object.values(Grade);
     const toast = useToast();
   
 
   
-    const handleStudentGradeChange = (areas: StudentGrade[]) => {
+    const handleStudentGradeChange = (areas: Grade[]) => {
       setSelectedStudentGrade(areas);
     };
   
@@ -149,8 +150,8 @@ import {
                     <S.StudentGradesOptionsContainer>
                       <CheckboxGroup
                         colorScheme="pink"
-                        value={selectedStudentGrade} // Bind value to selectedTeachingArea
-                        onChange={handleStudentGradeChange} // Update state when checkboxes are selected
+                        value={selectedStudentGrade} 
+                        onChange={handleStudentGradeChange} 
                       >
                         {StudentGrades.map((area) => (
                           <Checkbox key={area} value={area}>

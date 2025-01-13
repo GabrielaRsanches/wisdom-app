@@ -18,7 +18,8 @@ import { PasswordField } from '../../../helpers/PasswordField';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { TeacherRegistry } from '../../../helpers/interfaces';
-import { TeachingArea } from '../../../helpers/enum'; 
+
+import { TeachingArea } from '@shared/enum';
 import * as S from './TeacherSignUp.styles';
 import { usePostCreateTeacher } from '../../../../hooks/usePostCreateTeacher';
 
